@@ -1,0 +1,606 @@
+{
+  "lastUpdated": "2025-10-05T00:00:00+09:00",
+  "items": [
+    {
+      "brand": "Anycubic",
+      "model": "Kobra 2 Pro",
+      "tech": "FDM",
+      "motion": "BedSlinger",
+      "build": { "x": 250, "y": 220, "z": 220 },
+      "nozzle": 0.4,
+      "maxSpeed": 500,
+      "typicalSpeed": 300,
+      "maxTemp": 300,
+      "bedTemp": 110,
+      "enclosed": false,
+      "year": 2024,
+      "priceKRW": 269890,
+      "availability": ["KR"],
+      "image": "/img/printers/anycubic-kobra-2-pro.webp",
+      "officialUrl": "https://store.anycubic.com/products/kobra-2-pro",
+      "features": [
+        "자동 베드 레벨링",
+        "고속 500mm/s 인쇄",
+        "PEI 스프링 스틸 베드"
+      ],
+      "pros": ["가성비 우수", "쉬운 세팅", "고속 출력 지원"],
+      "cons": ["소음", "정밀도는 고가 모델 대비 낮음"],
+      "tags": ["Budget", "HighSpeed"],
+      "stores": [
+        {
+          "name": "Coupang",
+          "url": "https://www.coupang.com/vp/products/7639271926?itemId=20293376730&vendorItemId=91267977352&q=ANYCUBIC+Kobra+2+Pro&searchId=7fd9de631290057&sourceType=search&itemsCount=36&searchRank=0&rank=0&traceId=mgdmj149",
+          "type": "retail"
+        }
+      ]
+    },
+    {
+      "brand": "Anycubic",
+      "model": "Vyper",
+      "tech": "FDM",
+      "motion": "BedSlinger",
+      "build": { "x": 245, "y": 245, "z": 260 },
+      "nozzle": 0.4,
+      "maxSpeed": 180,
+      "typicalSpeed": 100,
+      "maxTemp": 260,
+      "bedTemp": 110,
+      "enclosed": false,
+      "year": 2022,
+      "priceKRW": 307200,
+      "availability": ["KR"],
+      "image": "/img/printers/anycubic-vyper.webp",
+      "officialUrl": "https://store.anycubic.com/products/anycubic-vyper",
+      "features": [
+        "자동 베드 레벨링",
+        "터치 스크린 UI",
+        "빠른 예열 시간"
+      ],
+      "pros": ["합리적 가격", "쉬운 사용성"],
+      "cons": ["소음 있음", "기본 펌웨어 한계"],
+      "tags": ["EasyUse", "Budget"],
+      "stores": [
+        {
+          "name": "Coupang",
+          "url": "https://www.coupang.com/vp/products/7360096163?itemId=18960542799&vendorItemId=87415170471&q=anycubic+Vyper&searchId=d1ef35f46528706&sourceType=search&itemsCount=36&searchRank=6&rank=6&traceId=mgdmksc8",
+          "type": "retail"
+        }
+      ]
+    },
+    {
+      "brand": "Bambu Lab",
+      "model": "A1",
+      "tech": "FDM",
+      "motion": "BedSlinger",
+      "build": { "x": 256, "y": 256, "z": 256 },
+      "nozzle": 0.4,
+      "maxSpeed": 500,
+      "typicalSpeed": 200,
+      "maxTemp": 300,
+      "bedTemp": 100,
+      "enclosed": false,
+      "year": 2024,
+      "priceKRW": 469000,
+      "availability": ["KR"],
+      "image": "/img/printers/bambulab-a1.png",
+      "officialUrl": "https://bambulab.com/en/a1",
+      "features": [
+        "AMS Lite 지원",
+        "터치스크린 UI",
+        "조용한 모션 시스템"
+      ],
+      "pros": ["가격대비 성능 우수", "AMS Lite 호환"],
+      "cons": ["개방형 프레임", "소음 다소 있음"],
+      "tags": ["AMS", "Budget", "Fast"],
+      "stores": [
+        {
+          "name": "Coupang",
+          "url": "https://www.coupang.com/vp/products/8680007279?itemId=25197625610&vendorItemId=92507816821&q=bambulab+a1&searchId=0cc85d645207434&sourceType=search&itemsCount=36&searchRank=1&rank=1&traceId=mgdmm4so",
+          "type": "retail"
+        }
+      ]
+    },
+    {
+      "brand": "Bambu Lab",
+      "model": "A1 mini",
+      "tech": "FDM",
+      "motion": "BedSlinger",
+      "build": { "x": 180, "y": 180, "z": 180 },
+      "nozzle": 0.4,
+      "maxSpeed": 500,
+      "typicalSpeed": 200,
+      "maxTemp": 300,
+      "bedTemp": 80,
+      "enclosed": false,
+      "year": 2023,
+      "priceKRW": 309000,
+      "availability": ["KR"],
+      "image": "/img/printers/bambulab-a1-mini.png",
+      "officialUrl": "https://bambulab.com/en/a1-mini/tech-specs",
+      "features": ["AMS Lite 호환", "자동 베드 레벨링", "필라멘트 커터", "조용한 동작"],
+      "pros": ["소형·가벼움", "멀티컬러 입문 최적"],
+      "cons": ["빌드 크기 제한"],
+      "tags": ["AMS", "Budget", "Compact"],
+      "stores": [
+        {
+          "name": "Coupang",
+          "url": "https://www.coupang.com/vp/products/8680390080",
+          "type": "retail"
+        }
+      ]
+    },    
+    {
+      "brand": "Bambu Lab",
+      "model": "H2D",
+      "tech": "FDM",
+      "motion": "CoreXY",
+      "build": { "x": 350, "y": 320, "z": 325 },
+      "nozzle": 0.4,
+      "maxSpeed": 1000,
+      "typicalSpeed": null,
+      "maxTemp": 350,
+      "bedTemp": null,
+      "enclosed": true,
+      "year": 2025,
+      "priceKRW": null,
+      "availability": ["KR"],
+      "image": "/img/printers/bambulab-h2d.jpg",
+      "officialUrl": "https://bambulab.com/en/h2d",
+      "features": [
+        "듀얼 노즐 출력",
+        "가열 챔버 (Heated Chamber)",
+        "AMS 2 Pro 및 AMS HT 지원",
+        "챔버 온도 제어"
+      ],
+      "pros": ["대형 출력 가능", "고급 재료 호환성 (카본, 글래스 혼합 등)"],
+      "cons": ["고가", "복잡한 유지보수 가능성"],
+      "tags": ["DualExtruder", "HeatedChamber"],
+      "stores": []
+    },
+    {
+      "brand": "Bambu Lab",
+      "model": "P1S",
+      "tech": "FDM",
+      "motion": "CoreXY",
+      "build": { "x": 256, "y": 256, "z": 256 },
+      "nozzle": 0.4,
+      "maxSpeed": 500,
+      "typicalSpeed": 200,
+      "maxTemp": 300,
+      "bedTemp": 100,
+      "enclosed": true,
+      "year": 2023,
+      "priceKRW": 719000,
+      "availability": ["KR"],
+      "image": "/img/printers/bambulab-p1s.jpg",
+      "officialUrl": "https://bambulab.com/en/p1s",
+      "features": [
+        "자동 베드 레벨링",
+        "카메라 모니터링",
+        "AMS(멀티 필라멘트) 지원"
+      ],
+      "pros": ["빠른 출력 속도", "정밀한 CoreXY", "조용한 동작"],
+      "cons": ["가격대 높음", "부품 수급 제한"],
+      "tags": ["CoreXY", "Enclosed", "High-speed"],
+      "stores": [
+        {
+          "name": "Coupang",
+          "url": "https://www.coupang.com/vp/products/8830010334?itemId=25728323699&vendorItemId=92716950193&q=bambulab+p1s&searchId=9a796c3d5237940&sourceType=search&itemsCount=36&searchRank=3&rank=3&traceId=mgdmrd4o",
+          "type": "retail"
+        }
+      ]
+    },
+    {
+      "brand": "Bambu Lab",
+      "model": "X1 Carbon",
+      "tech": "FDM",
+      "motion": "CoreXY",
+      "build": { "x": 256, "y": 256, "z": 256 },
+      "nozzle": 0.4,
+      "maxSpeed": 500,
+      "typicalSpeed": 200,
+      "maxTemp": 300,
+      "bedTemp": 110,
+      "enclosed": true,
+      "year": 2023,
+      "priceKRW": 1790000,
+      "availability": ["KR"],
+      "image": "/img/printers/bambulab-x1c.jpg",
+      "officialUrl": "https://bambulab.com/en/x1",
+      "features": [
+        "AMS 지원",
+        "Lidar 스캐닝",
+        "자동 베드 레벨링",
+        "카메라 모니터링"
+      ],
+      "pros": ["고속·정밀 출력", "탄소섬유 프레임", "AMS 통합"],
+      "cons": ["비싼 가격", "고급 부품 교체비용 높음"],
+      "tags": ["CoreXY", "AMS", "High-end"],
+      "stores": [
+        {
+          "name": "Coupang",
+          "url": "https://www.coupang.com/vp/products/8680421779?itemId=25199041142&vendorItemId=92195660506&q=bambulab+x1c&searchId=de967cb815411063&sourceType=search&itemsCount=36&searchRank=1&rank=1&traceId=mgdms3uc",
+          "type": "retail"
+        }
+      ]
+    },
+    {
+      "brand": "Creality",
+      "model": "Ender3 V2",
+      "tech": "FDM",
+      "motion": "BedSlinger",
+      "build": { "x": 220, "y": 220, "z": 250 },
+      "nozzle": 0.4,
+      "maxSpeed": 180,
+      "typicalSpeed": 60,
+      "maxTemp": 260,
+      "bedTemp": 100,
+      "enclosed": false,
+      "year": 2021,
+      "priceKRW": 314800,
+      "availability": ["KR"],
+      "image": "/img/printers/creality-ender3-v2.jpg",
+      "officialUrl": "https://www.creality.com/collections/ender-3-series/products/ender-3-v2-3d-printer",
+      "features": [
+        "CR Touch 자동 레벨링",
+        "슬라이드 베드",
+        "조용한 드라이버"
+      ],
+      "pros": ["가성비", "부품 접근성", "활발한 커뮤니티"],
+      "cons": ["고속 출력 한계", "케이블 관리 필요"],
+      "tags": ["Budget", "Popular"],
+      "stores": [
+        {
+          "name": "Coupang",
+          "url": "https://www.coupang.com/vp/products/8436563755?itemId=24400206032&vendorItemId=91415045787&q=Ender3+V2&searchId=774719616139655&sourceType=search&itemsCount=36&searchRank=1&rank=1&traceId=mgdmt3kc",
+          "type": "retail"
+        }
+      ]
+    },
+    {
+      "brand": "Creality",
+      "model": "Ender3 V3",
+      "tech": "FDM",
+      "motion": "CoreXZ",
+      "build": { "x": 220, "y": 220, "z": 250 },
+      "nozzle": 0.4,
+      "maxSpeed": 600,
+      "typicalSpeed": 150,
+      "maxTemp": 300,
+      "bedTemp": 110,
+      "enclosed": false,
+      "year": 2024,
+      "priceKRW": 410000,
+      "availability": ["KR"],
+      "image": "/img/printers/creality-ender3-v3.png",
+      "officialUrl": "https://www.creality.com/",
+      "features": [
+        "자동 레벨링(모델별 상이)",
+        "직관적 조작",
+        "풍부한 커뮤니티"
+      ],
+      "pros": ["합리적 가격", "부품 접근성 좋음"],
+      "cons": [
+        "베드 슬링어 특성상 고속에서 품질 저하",
+        "방음/밀폐 아쉬움"
+      ],
+      "tags": ["Budget", "Open-frame"],
+      "stores": [
+        {
+          "name": "Coupang",
+          "url": "https://www.coupang.com/vp/products/8391664421?itemId=24257653798&vendorItemId=91614667272&q=Ender3+V3&searchId=954149be25436616&sourceType=search&itemsCount=36&searchRank=6&rank=6&traceId=mgdmu5d1",
+          "type": "retail"
+        }
+      ]
+    },
+    {
+      "brand": "Creality",
+      "model": "K1C",
+      "tech": "FDM",
+      "motion": "CoreXY",
+      "build": { "x": 220, "y": 220, "z": 250 },
+      "nozzle": 0.4,
+      "maxSpeed": 600,
+      "typicalSpeed": 300,
+      "maxTemp": 300,
+      "bedTemp": 110,
+      "enclosed": true,
+      "year": 2024,
+      "priceKRW": 679000,
+      "availability": ["KR"],
+      "image": "/img/printers/creality-k1c.png",
+      "officialUrl": "https://www.creality.com/products/k1c-3d-printer",
+      "features": ["CoreXY 구조", "AI 카메라 모니터링", "자동 베드 레벨링"],
+      "pros": ["고속 출력", "정확한 품질", "AI 모니터링"],
+      "cons": ["소프트웨어 최적화 부족", "약간의 소음"],
+      "tags": ["CoreXY", "AI", "HighSpeed"],
+      "stores": [
+        {
+          "name": "Coupang",
+          "url": "https://www.coupang.com/vp/products/8898615545?itemId=25982807909&vendorItemId=92965301880&q=k1c&searchId=5dd0e47325377349&sourceType=search&itemsCount=36&searchRank=0&rank=0&traceId=mgdmv6fq",
+          "type": "retail"
+        }
+      ]
+    },
+    {
+      "brand": "Creality",
+      "model": "K1 Max",
+      "tech": "FDM",
+      "motion": "CoreXY",
+      "build": { "x": 300, "y": 300, "z": 300 },
+      "nozzle": 0.4,
+      "maxSpeed": 600,
+      "typicalSpeed": 300,
+      "maxTemp": 300,
+      "bedTemp": 120,
+      "enclosed": true,
+      "year": 2023,
+      "priceKRW": 949000,
+      "availability": ["KR"],
+      "image": "/img/printers/creality-k1-max.jpg",
+      "officialUrl": "https://www.creality.com/products/creality-k1-max-3d-printer",
+      "features": ["AI 카메라/라이다", "자동 레벨링", "대형 300³ 빌드"],
+      "pros": ["대형·고속 출력", "정밀도 우수"],
+      "cons": ["부피 큼", "소음·발열 관리 필요"],
+      "tags": ["CoreXY", "LargeFormat", "HighSpeed"],
+      "stores": [
+        {
+          "name": "Coupang",
+          "url": "https://www.coupang.com/vp/products/7495923559",
+          "type": "retail"
+        }
+      ]
+    },    
+    {
+      "brand": "Creality",
+      "model": "K2 Pro",
+      "tech": "FDM",
+      "motion": "CoreXY",
+      "build": { "x": 260, "y": 260, "z": 300 },
+      "nozzle": 0.4,
+      "maxSpeed": 600,
+      "typicalSpeed": 300,
+      "maxTemp": 320,
+      "bedTemp": 110,
+      "enclosed": true,
+      "year": 2025,
+      "priceKRW": 1299000,
+      "availability": ["KR"],
+      "image": "/img/printers/creality-k2-pro.png",
+      "officialUrl": "https://www.creality.com/products/k2-pro",
+      "features": ["듀얼 노즐", "자동 노즐 클리닝", "AI 카메라", "AMS 지원"],
+      "pros": ["듀얼 출력 가능", "고속 인쇄", "AMS 호환"],
+      "cons": ["초기 세팅 복잡", "소프트웨어 한계"],
+      "tags": ["DualExtruder", "CoreXY", "HighSpeed"],
+      "stores": [
+        {
+          "name": "Coupang",
+          "url": "https://www.coupang.com/vp/products/9015825487?itemId=26430977147&vendorItemId=93406761093&sourceType=srp_product_ads&clickEventId=88b7d2a0-a1e0-11f0-b69b-65b33119a2f8&korePlacement=15&koreSubPlacement=1&clickEventId=88b7d2a0-a1e0-11f0-b69b-65b33119a2f8&korePlacement=15&koreSubPlacement=1&traceId=mgdmvs2m",
+          "type": "retail"
+        }
+      ]
+    },
+    {
+      "brand": "ELEGOO",
+      "model": "Neptune4 Pro",
+      "tech": "FDM",
+      "motion": "BedSlinger",
+      "build": { "x": 225, "y": 225, "z": 265 },
+      "nozzle": 0.4,
+      "maxSpeed": 500,
+      "typicalSpeed": 200,
+      "maxTemp": 300,
+      "bedTemp": 110,
+      "enclosed": false,
+      "year": 2023,
+      "priceKRW": 870800,
+      "availability": ["KR"],
+      "image": "/img/printers/elegoo-neptune4-pro.webp",
+      "officialUrl": "https://us.elegoo.com/products/elegoo-neptune-4-pro-fdm-3d-printer",
+      "features": ["Klipper 기본 탑재", "11×11 오토레벨링", "세그먼트 히트베드"],
+      "pros": ["고속 출력", "설정 쉬움"],
+      "cons": ["소음", "세부 마감 편차"],
+      "tags": ["Klipper", "HighSpeed", "Budget"],
+      "stores": [
+        {
+          "name": "Coupang",
+          "url": "https://www.coupang.com/vp/products/8877474292",
+          "type": "retail"
+        }
+      ]
+    },    
+    {
+      "brand": "Flashforge",
+      "model": "Adventurer 5M",
+      "tech": "FDM",
+      "motion": "CoreXY",
+      "build": { "x": 220, "y": 220, "z": 220 },
+      "nozzle": 0.4,
+      "maxSpeed": 600,
+      "typicalSpeed": null,
+      "maxTemp": null,
+      "bedTemp": null,
+      "enclosed": false,
+      "year": 2024,
+      "priceKRW": null,
+      "availability": ["KR"],
+      "image": "/img/printers/flashforge-adventurer-5m.png",
+      "officialUrl": "https://www.flashforge.com/products/adventurer-5m-pro-3d-printer",
+      "features": [
+        "Quick-detach 노즐",
+        "CoXY 구조",
+        "고속 인쇄 600 mm/s"
+      ],
+      "pros": ["세팅 쉬움", "코어XY 안정성", "스마트 기능"],
+      "cons": ["정밀도는 보급형 수준", "고온 재료 한계"],
+      "tags": ["CoreXY", "Fast"],
+      "stores": [
+      ]
+    },
+    {
+      "brand": "Flashforge",
+      "model": "Guider 3 Ultra",
+      "tech": "FDM",
+      "motion": "CoreXY",
+      "build": { "x": 330, "y": 330, "z": 600 },
+      "nozzle": 0.4,
+      "maxSpeed": null,
+      "typicalSpeed": null,
+      "maxTemp": null,
+      "bedTemp": null,
+      "enclosed": true,
+      "year": 2024,
+      "priceKRW": null,
+      "availability": ["KR"],
+      "image": "/img/printers/flashforge-guider3-ultra.webp",
+      "officialUrl": "https://www.flashforge.com/products/flashforge-guider-3-ultra-3d-printer",
+      "features": ["대형 출력", "듀얼 노즐 옵션", "히터 챔버"],
+      "pros": ["큰 출력 가능", "전문성 높은 출력"],
+      "cons": ["크고 무거움", "비용 높음"],
+      "tags": ["LargeFormat", "Professional"],
+      "stores": []
+    },
+    {
+      "brand": "Prusa",
+      "model": "MK4",
+      "tech": "FDM",
+      "motion": "BedSlinger",
+      "build": { "x": 250, "y": 210, "z": 220 },
+      "nozzle": 0.4,
+      "maxSpeed": 200,
+      "typicalSpeed": 150,
+      "maxTemp": 300,
+      "bedTemp": 120,
+      "enclosed": false,
+      "year": 2023,
+      "priceKRW": 1968800,
+      "availability": ["KR"],
+      "image": "/img/printers/prusa-mk4.jpg",
+      "officialUrl": "https://www.prusa3d.com/product/original-prusa-mk4-3d-printer/",
+      "features": [
+        "자동 베드 레벨링",
+        "인쇄 중 정전 복구",
+        "Nextruder 툴헤드",
+        "Wi-Fi / LAN 원격 제어"
+      ],
+      "pros": ["높은 신뢰성", "정밀한 출력 품질", "활발한 커뮤니티"],
+      "cons": ["비교적 느린 속도", "가격대 높음"],
+      "tags": ["Reliable", "Open-frame"],
+      "stores": [
+        {
+          "name": "Coupang",
+          "url": "https://www.coupang.com/vp/products/8421595446?itemId=24359146951&vendorItemId=91635194904&q=prusa+mk4&searchId=bc46a94c25440459&sourceType=search&itemsCount=36&searchRank=1&rank=1&traceId=mgdmy4vr",
+          "type": "retail"
+        }
+      ]
+    },
+    {
+      "brand": "Prusa",
+      "model": "XL",
+      "tech": "FDM",
+      "motion": "CoreXY",
+      "build": { "x": 360, "y": 360, "z": 360 },
+      "nozzle": 0.4,
+      "maxSpeed": 300,
+      "typicalSpeed": 150,
+      "maxTemp": 300,
+      "bedTemp": 120,
+      "enclosed": true,
+      "year": 2024,
+      "priceKRW": 6564500,
+      "availability": ["KR"],
+      "image": "/img/printers/prusa-xl.webp",
+      "officialUrl": "https://www.prusa3d.com/product/original-prusa-xl/",
+      "features": [
+        "멀티 툴헤드 (최대 5개)",
+        "CoreXY 구조",
+        "자동 툴 체인징",
+        "모듈형 베드 시스템"
+      ],
+      "pros": ["대형 출력", "자동화 높은 수준", "정밀한 멀티컬러 지원"],
+      "cons": ["가격대 높음", "복잡한 유지보수"],
+      "tags": ["CoreXY", "MultiTool", "LargeFormat"],
+      "stores": [
+        {
+          "name": "Coupang",
+          "url": "https://www.coupang.com/vp/products/8949680424?itemId=26177050571&vendorItemId=93156689960&q=prusa+xl&searchId=65c8c177435141&sourceType=search&itemsCount=36&searchRank=3&rank=3&traceId=mgdmyrz5",
+          "type": "retail"
+        }
+      ]
+    },
+    {
+      "brand": "Snapmaker",
+      "model": "U1",
+      "tech": "FDM",
+      "motion": "CoreXY",
+      "build": { "x": 270, "y": 270, "z": 270 },
+      "nozzle": 0.4,
+      "maxSpeed": 500,
+      "typicalSpeed": 300,
+      "maxTemp": 300,
+      "bedTemp": 100,
+      "enclosed": false,
+      "year": 2025,
+      "priceKRW": null,
+      "availability": ["KR"],
+      "image": "/img/printers/snapmaker-u1.webp",
+      "officialUrl": "https://www.snapmaker.com/en-US/snapmaker-u1",
+      "features": [
+        "4-way tool changer",
+        "RFID filament recognition",
+        "Automatic toolhead alignment",
+        "Camera monitoring"
+      ],
+      "pros": ["진정한 멀티컬러 출력 가능", "고속 출력 및 빠른 도구 전환"],
+      "cons": ["출시 초기 제품으로 안정성 우려", "밀폐 시스템 별도 옵션"],
+      "tags": ["ToolChanger", "MultiMaterial"],
+      "stores": []
+    },
+    {
+      "brand": "Sovol",
+      "model": "SV07",
+      "tech": "FDM",
+      "motion": "BedSlinger",
+      "build": { "x": 220, "y": 220, "z": 250 },
+      "nozzle": 0.4,
+      "maxSpeed": 500,
+      "typicalSpeed": 200,
+      "maxTemp": 300,
+      "bedTemp": 100,
+      "enclosed": false,
+      "year": 2023,
+      "priceKRW": null,
+      "availability": ["KR"],
+      "image": "/img/printers/sovol-sv07.webp",
+      "officialUrl": "https://www.sovol3d.com/products/sovol-sv07-klipper-direct-drive-3d-printer-print-speed-250mm-s",
+      "features": ["Klipper 기본", "5\" 터치", "직결 듀얼기어", "Wi-Fi"],
+      "pros": ["가성비 고속", "세팅 용이"],
+      "cons": ["소음", "QC 편차 가능"],
+      "tags": ["Klipper", "Budget", "Fast"],
+      "stores": []
+    },    
+    {
+      "brand": "Ultimaker",
+      "model": "Ultimaker 3",
+      "tech": "FDM",
+      "motion": "Gantry",
+      "build": { "x": 215, "y": 215, "z": 200 },
+      "nozzle": 0.4,
+      "maxSpeed": 300,
+      "typicalSpeed": null,
+      "maxTemp": 280,
+      "bedTemp": 100,
+      "enclosed": false,
+      "year": 2016,
+      "priceKRW": null,
+      "availability": ["KR"],
+      "image": "/img/printers/ultimaker-3.jpg",
+      "officialUrl": "https://ultimaker.com",
+      "features": ["듀얼 익스트루더", "자동 노즐 리프팅", "무수용성 PVA 서포트"],
+      "pros": ["고품질 멀티재료 출력", "정교한 기능"],
+      "cons": ["출력 크기 제한", "비용대 높음"],
+      "tags": ["Professional", "DualExtruder"],
+      "stores": []
+    }
+  ]
+}

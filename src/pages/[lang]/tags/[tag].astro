@@ -1,0 +1,128 @@
+---
+import Layout from "@components/Layout.astro";
+import PostCard from "@components/PostCard.astro";
+import TagBadge from "@components/TagBadge.astro";
+import { slugify } from "@utils/format";
+import { t } from "@utils/i18n";
+import { getCollection } from "astro:content";
+
+export async function getStaticPaths() {
+  const langs: ("ko" | "en")[] = ["ko", "en"];
+  const paths: any[] = [];
+  for (const lang of langs) {
+    const coll = await getCollection(lang);
+    const tagSet = new Map<string, string>();
+    for (const e of coll) {
+      const tags = (e.data as any)?.tags ?? [];
+      for (const t of tags) tagSet.set(slugify(t), t);
+    }
+    for (const [slug, label] of tagSet) {
+      paths.push({
+        params: { lang, tag: slug },
+        props: { lang, tagLabel: label },
+      });
+    }
+  }
+  return paths;
+}
+
+const { lang, tagLabel } = Astro.props as {
+  lang: "ko" | "en";
+  tagLabel: string;
+};
+const all = await getCollection(lang);
+const posts = all
+  .filter((e) =>
+    ((e.data as any)?.tags ?? []).some(
+      (t: string) => slugify(t) === slugify(tagLabel)
+    )
+  )
+  .sort(
+    (a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime()
+  );
+
+// Pagination (first page)
+const PER_PAGE = 12; // keep in sync with /[lang]/page/[page].astro
+const page = 1;
+const totalPages = Math.ceil(posts.length / PER_PAGE);
+const paged = posts.slice(0, PER_PAGE);
+const pageHref = (p: number) =>
+  p === 1
+    ? `/${lang}/tags/${slugify(tagLabel)}/`
+    : `/${lang}/tags/${slugify(tagLabel)}/page/${p}/`;
+
+const total = posts.length;
+const lastDate = total ? new Date(posts[0].data.date) : null;
+function fmt(d: Date) {
+  return lang === "en"
+    ? d.toLocaleDateString("en-US")
+    : d.toLocaleDateString("ko-KR");
+}
+---
+
+<Layout
+  lang={lang}
+  title={`${tagLabel} — ${t("tag.label", lang)}`}
+  description={`${t("tag.descriptionPrefix", lang)} ${tagLabel}`}
+>
+  <section class="mb-6 text-center">
+    <TagBadge label={tagLabel} count={total} lang={lang} />
+    <p class="mt-2 text-sm text-mutedFg">
+      {
+        total
+          ? `${t("tag.latestUpdate", lang)} ${fmt(lastDate!)}`
+          : t("tag.noPosts", lang)
+      }
+    </p>
+  </section>
+  <section class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+    {paged.map((p) => <PostCard post={p} />)}
+  </section>
+
+  {
+    totalPages > 1 && (
+      <nav class="mt-6 flex items-center justify-center gap-2 text-sm">
+        {/* Prev */}
+        <a
+          href={page > 1 ? pageHref(page - 1) : undefined}
+          aria-disabled={page === 1}
+          class={`px-3 py-1 rounded-md border ${
+            page === 1
+              ? "opacity-50 pointer-events-none border-border"
+              : "bg-muted text-mutedFg border-border hover:bg-muted/80"
+          }`}
+        >
+          {t("pagination.prev", lang)}
+        </a>
+
+        {/* Numbers */}
+        {Array.from({ length: totalPages }, (_, i) => i + 1).map((p) => (
+          <a
+            href={pageHref(p)}
+            aria-current={p === page ? "page" : undefined}
+            class={`px-3 py-1 rounded-md border ${
+              p === page
+                ? "bg-brand text-brandFg border-brand"
+                : "bg-muted text-mutedFg border-border hover:bg-muted/80"
+            }`}
+          >
+            {p}
+          </a>
+        ))}
+
+        {/* Next */}
+        <a
+          href={page < totalPages ? pageHref(page + 1) : undefined}
+          aria-disabled={page === totalPages}
+          class={`px-3 py-1 rounded-md border ${
+            page === totalPages
+              ? "opacity-50 pointer-events-none border-border"
+              : "bg-muted text-mutedFg border-border hover:bg-muted/80"
+          }`}
+        >
+          {t("pagination.next", lang)}
+        </a>
+      </nav>
+    )
+  }
+</Layout>

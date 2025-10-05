@@ -1,0 +1,45 @@
+---
+import Layout from "@components/Layout.astro";
+import Seo from "@components/Seo.astro";
+import { t } from "@utils/i18n";
+const { lang } = Astro.params as { lang: "ko" | "en" };
+
+const title = t("about.title", lang);
+const desc = t("about.desc", lang);
+
+export async function getStaticPaths() {
+  return [
+    { params: { lang: "ko" }, props: { lang: "ko" } },
+    { params: { lang: "en" }, props: { lang: "en" } },
+  ];
+}
+---
+
+<Layout lang={lang} title={title} description={desc}>
+  <Seo
+    title={title}
+    description={desc}
+    lang={lang}
+    canonical={`/${lang}/about/`}
+  />
+
+  <section class="prose max-w-none">
+    <h1>{title}</h1>
+    <p>{t("about.intro", lang)}</p>
+
+    <h2>{t("about.what", lang)}</h2>
+    <ul>
+      <li>{t("about.what.news", lang)}</li>
+      <li>{t("about.what.freeStl", lang)}</li>
+      <li>{t("about.what.tips", lang)}</li>
+    </ul>
+
+    <h2>{t("about.mission", lang)}</h2>
+    <p>{t("about.mission.body", lang)}</p>
+
+    <h2>{t("about.contact", lang)}</h2>
+    <p class="opacity-80">
+      {t("about.contact.prefix", lang)} yeppyshiba(at)gmail.com
+    </p>
+  </section>
+</Layout>

@@ -1,0 +1,100 @@
+---
+import AffiliateBlock from "@components/AffiliateBlock.astro";
+import Layout from "@components/Layout.astro";
+import PrevNext from "@components/PrevNext.astro";
+import RelatedPosts from "@components/RelatedPosts.astro";
+import TagChips from "@components/TagChips.astro";
+import { getCollection, type CollectionEntry } from "astro:content";
+
+export async function getStaticPaths() {
+  const koEntries = await getCollection("ko");
+  const enEntries = await getCollection("en");
+
+  const koPaths = koEntries.map((entry) => ({
+    params: { lang: "ko", slug: entry.slug },
+    props: { entry, lang: "ko" as const },
+  }));
+
+  const enPaths = enEntries.map((entry) => ({
+    params: { lang: "en", slug: entry.slug },
+    props: { entry, lang: "en" as const },
+  }));
+
+  return [...koPaths, ...enPaths];
+}
+
+const { entry, lang } = Astro.props as {
+  entry: CollectionEntry<"ko"> | CollectionEntry<"en">;
+  lang: "ko" | "en";
+};
+
+const fm = entry.data as any;
+
+// Render markdown
+const { Content } = await entry.render();
+
+// Build navigation data
+const coll = await getCollection(lang);
+const sorted = coll.sort(
+  (a, b) => new Date(a.data.date).getTime() - new Date(b.data.date).getTime()
+);
+const idx = sorted.findIndex((e) => e.slug === entry.slug);
+const prev =
+  idx > 0
+    ? { slug: sorted[idx - 1].slug, title: sorted[idx - 1].data.title }
+    : null;
+const next =
+  idx >= 0 && idx < sorted.length - 1
+    ? { slug: sorted[idx + 1].slug, title: sorted[idx + 1].data.title }
+    : null;
+
+// Related by tag overlap (exclude self)
+const tags: string[] = (fm?.tags ?? []) as string[];
+const related = tags.length
+  ? coll
+      .filter(
+        (e) =>
+          e.slug !== entry.slug &&
+          ((e.data as any)?.tags ?? []).some((t: string) => tags.includes(t))
+      )
+      .slice(0, 6)
+  : [];
+---
+
+<Layout
+  lang={lang}
+  title={fm.title ?? "FDM Hub"}
+  description={fm.description ?? ""}
+>
+  {
+    fm.disclosure && (
+      <p class="text-xs px-3 py-2 rounded-md bg-muted mb-3">{fm.disclosure}</p>
+    )
+  }
+
+  <article class="prose max-w-none">
+    <h1>{fm.title}</h1>
+    <Content />
+  </article>
+
+  <TagChips tags={fm?.tags ?? []} lang={lang} />
+
+  <div class="mt-6">
+    <AffiliateBlock
+      links={fm?.affiliate_links ?? []}
+      disclosure={fm?.disclosure}
+    />
+  </div>
+
+  <RelatedPosts posts={related} />
+
+  <PrevNext prev={prev} next={next} lang={lang} />
+
+  <div class="mt-8 text-center">
+    <a
+      href={`/${lang}/`}
+      class="inline-flex items-center gap-2 px-3 py-2 rounded-lg bg-muted hover:bg-muted/80 border border-border"
+      >{lang === "en" ? "Back to list" : "목록으로"}</a
+    >
+  </div>
+</Layout>

@@ -1,0 +1,58 @@
+---
+import TagChips from "@components/TagChips.astro";
+import { formatDate } from "@utils/format";
+const { post } = Astro.props as { post: any };
+const fm = post?.data ?? {};
+const slug: string = post?.slug ?? "";
+const lang: "ko" | "en" = fm?.lang === "en" ? "en" : "ko";
+// Prefer explicit canonical if provided; otherwise build from lang + slug
+
+// Always produce a relative internal URL so dev (localhost) and prod both work.
+// If canonical is absolute, strip domain and use only pathname; else use lang+slug.
+function toRelative(href: string): string {
+  try {
+    const u = new URL(href);
+    const p = u.pathname.endsWith("/") ? u.pathname : u.pathname + "/";
+    return p;
+  } catch {
+    // Not an absolute URL, return as-is (assuming already relative)
+    return href.endsWith("/") ? href : href + "/";
+  }
+}
+
+const href: string = fm?.canonical
+  ? toRelative(fm.canonical)
+  : `/${lang}/${slug}/`;
+---
+
+<article
+  class="card group transition-all hover:shadow-md hover:-translate-y-0.5"
+>
+  {
+    fm.cover && (
+      <a href={href} class="block overflow-hidden rounded-md mb-3 bg-card">
+        <div class="aspect-video bg-muted">
+          <img
+            src={fm.cover}
+            alt={fm.title}
+            class="w-full h-full object-cover transition-transform duration-200 group-hover:scale-[1.02]"
+            loading="lazy"
+            decoding="async"
+            width="800"
+            height="450"
+          />
+        </div>
+      </a>
+    )
+  }
+  <h3 class="text-lg font-semibold leading-tight mb-1">
+    <a
+      href={href}
+      class="line-clamp-2 hover:text-brand transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-brand"
+      >{fm.title}</a
+    >
+  </h3>
+  <div class="text-sm opacity-70">{formatDate(fm.date, fm.lang)}</div>
+
+  {fm.tags && <TagChips tags={fm.tags.slice(0, 4)} lang={lang} />}
+</article>

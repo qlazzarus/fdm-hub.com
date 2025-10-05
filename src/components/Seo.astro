@@ -1,0 +1,150 @@
+---
+// Enhanced SEO component (backwards-compatible)
+// Props (backward compat kept):
+//  - title: string (required)
+//  - description?: string
+//  - canonical?: string            // absolute or path; if omitted, derived from Astro.url
+//  - lang?: 'ko' | 'en'            // default 'ko'
+//  - alternate?: { lang: 'ko'|'en'; url: string }[] // optional hreflang list
+//  - image?: string                // absolute or path
+//  - noindex?: boolean             // true => robots noindex
+//  - type?: 'website' | 'article'  // Open Graph type
+//  - article?: {                   // If present, emit Article JSON-LD
+//       publishedTime?: string;    // ISO
+//       modifiedTime?: string;     // ISO
+//       author?: string;           // site/author name
+//       tags?: string[];
+//     }
+
+const {
+  title,
+  description,
+  canonical,
+  lang = "ko",
+  alternate = [],
+  image,
+  noindex = false,
+  type = "website",
+  article,
+} = Astro.props as {
+  title: string;
+  description?: string;
+  canonical?: string;
+  lang?: "ko" | "en";
+  alternate?: { lang: "ko" | "en"; url: string }[];
+  image?: string;
+  noindex?: boolean;
+  type?: "website" | "article";
+  article?: {
+    publishedTime?: string;
+    modifiedTime?: string;
+    author?: string;
+    tags?: string[];
+  };
+};
+
+// Helpers
+const site = Astro.site?.origin ?? "";
+function toAbs(u?: string): string | undefined {
+  if (!u) return undefined;
+  try {
+    return new URL(u).toString();
+  } catch {}
+  if (!site) return u.startsWith("/") ? u : `/${u}`;
+  const path = u.startsWith("/") ? u : `/${u}`;
+  return site + path;
+}
+
+// Canonical URL
+const currentPath = Astro.url?.pathname ?? "/";
+const canonicalAbs =
+  toAbs(canonical) ?? (site ? site + currentPath : undefined);
+
+// Open Graph/Twitter image (absolute if possible)
+const ogImage = toAbs(image);
+
+// Build hreflang alternates
+let alts: { lang: "ko" | "en"; url: string }[] = [];
+if (alternate && alternate.length) {
+  alts = alternate.map((a) => ({ lang: a.lang, url: toAbs(a.url) ?? a.url }));
+} else {
+  // Auto-generate based on current path by swapping the first segment
+  const parts = currentPath.split("/").filter(Boolean);
+  function swap(to: "ko" | "en") {
+    const copy = [...parts];
+    if (copy.length === 0) return `/${to}/`;
+    if (copy[0] === "ko" || copy[0] === "en") copy[0] = to;
+    else copy.unshift(to);
+    return "/" + copy.join("/") + (currentPath.endsWith("/") ? "/" : "");
+  }
+  const koUrl = toAbs(swap("ko")) ?? swap("ko");
+  const enUrl = toAbs(swap("en")) ?? swap("en");
+  alts = [
+    { lang: "ko", url: koUrl },
+    { lang: "en", url: enUrl },
+  ];
+}
+
+// Robots
+const robots = noindex ? "noindex, nofollow" : "index, follow";
+---
+
+<!-- Base SEO -->
+<title>{title}</title>
+{description && <meta name="description" content={description} />}
+<meta name="robots" content={robots} />
+{canonicalAbs && <link rel="canonical" href={canonicalAbs} />}
+
+<!-- hreflang -->
+{alts.map((a) => <link rel="alternate" hreflang={a.lang} href={a.url} />)}
+<link
+  rel="alternate"
+  hreflang="x-default"
+  href={alts.find((a) => a.lang === lang)?.url ?? canonicalAbs ?? "/"}
+/>
+
+<!-- Open Graph -->
+<meta property="og:type" content={type} />
+<meta property="og:title" content={title} />
+{description && <meta property="og:description" content={description} />}
+{canonicalAbs && <meta property="og:url" content={canonicalAbs} />}
+{ogImage && <meta property="og:image" content={ogImage} />}
+{ogImage && <meta property="og:image:alt" content={title} />}
+<meta property="og:locale" content={lang === "en" ? "en_US" : "ko_KR"} />
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content={title} />
+{description && <meta name="twitter:description" content={description} />}
+{ogImage && <meta name="twitter:image" content={ogImage} />}
+
+<!-- JSON-LD (Article) -->
+{
+  type === "article" && article && canonicalAbs && (
+    <script
+      type="application/ld+json"
+      set:html={JSON.stringify(
+        {
+          "@context": "https://schema.org",
+          "@type": "Article",
+          headline: title,
+          description: description,
+          mainEntityOfPage: canonicalAbs,
+          inLanguage: lang === "en" ? "en-US" : "ko-KR",
+          datePublished: article.publishedTime,
+          dateModified: article.modifiedTime || article.publishedTime,
+          author: article.author
+            ? { "@type": "Person", name: article.author }
+            : undefined,
+          image: ogImage,
+          keywords:
+            article.tags && article.tags.length
+              ? article.tags.join(", ")
+              : undefined,
+        },
+        null,
+        0
+      )}
+    />
+  )
+}

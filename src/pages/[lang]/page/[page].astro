@@ -1,0 +1,102 @@
+---
+import Layout from "@components/Layout.astro";
+import PostCard from "@components/PostCard.astro";
+import { t } from "@utils/i18n";
+import { getCollection } from "astro:content";
+
+// ⚠️ index.astro의 PER_PAGE와 동일하게 유지하세요
+export const PER_PAGE = 12;
+
+export async function getStaticPaths() {
+  const langs: ("ko" | "en")[] = ["ko", "en"];
+  const paths: {
+    params: { lang: "ko" | "en"; page: string };
+    props: { lang: "ko" | "en"; page: number };
+  }[] = [];
+
+  for (const lang of langs) {
+    const posts = (await getCollection(lang)).sort(
+      (a, b) =>
+        new Date(b.data.date).getTime() - new Date(a.data.date).getTime()
+    );
+    const totalPages = Math.ceil(posts.length / PER_PAGE);
+    for (let p = 2; p <= totalPages; p++) {
+      paths.push({
+        params: { lang, page: String(p) },
+        props: { lang, page: p },
+      });
+    }
+  }
+  return paths;
+}
+
+const { lang, page } = Astro.props as { lang: "ko" | "en"; page: number };
+const all = (await getCollection(lang)).sort(
+  (a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime()
+);
+const totalPages = Math.ceil(all.length / PER_PAGE);
+const start = (page - 1) * PER_PAGE;
+const end = start + PER_PAGE;
+const paged = all.slice(start, end);
+
+const pageHref = (p: number) => (p === 1 ? `/${lang}/` : `/${lang}/page/${p}/`);
+---
+
+<Layout
+  lang={lang}
+  title={`${t("global.brand", lang)} — ${t("list.heading", lang)} ${page}/${totalPages}`}
+  description={t("list.description", lang)}
+>
+  <h1 class="text-2xl font-bold mb-4">
+    {t("list.heading", lang)}
+    <span class="opacity-70 text-base">({page}/{totalPages})</span>
+  </h1>
+
+  <section class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+    {paged.map((p) => <PostCard post={p} />)}
+  </section>
+
+  {
+    totalPages > 1 && (
+      <nav class="mt-6 flex items-center justify-center gap-2 text-sm">
+        <a
+          href={page > 1 ? pageHref(page - 1) : undefined}
+          aria-disabled={page === 1}
+          class={`px-3 py-1 rounded-md border ${
+            page === 1
+              ? "opacity-50 pointer-events-none border-border"
+              : "bg-muted text-mutedFg border-border hover:bg-muted/80"
+          }`}
+        >
+          {lang === "en" ? "Prev" : "이전"}
+        </a>
+
+        {Array.from({ length: totalPages }, (_, i) => i + 1).map((p) => (
+          <a
+            href={pageHref(p)}
+            aria-current={p === page ? "page" : undefined}
+            class={`px-3 py-1 rounded-md border ${
+              p === page
+                ? "bg-brand text-brandFg border-brand"
+                : "bg-muted text-mutedFg border-border hover:bg-muted/80"
+            }`}
+          >
+            {p}
+          </a>
+        ))}
+
+        <a
+          href={page < totalPages ? pageHref(page + 1) : undefined}
+          aria-disabled={page === totalPages}
+          class={`px-3 py-1 rounded-md border ${
+            page === totalPages
+              ? "opacity-50 pointer-events-none border-border"
+              : "bg-muted text-mutedFg border-border hover:bg-muted/80"
+          }`}
+        >
+          {lang === "en" ? "Next" : "다음"}
+        </a>
+      </nav>
+    )
+  }
+</Layout>

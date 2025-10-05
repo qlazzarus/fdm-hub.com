@@ -1,0 +1,39 @@
+---
+---
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>FDM Hub</title>
+    <meta name="description" content="3D Print News & Links" />
+    <link rel="icon" href="/favicon.svg" />
+    <!-- No-JS fallback: redirect to Korean -->
+    <meta http-equiv="refresh" content="0; url=/ko/">
+    <script is:inline>
+      (function(){
+        try {
+          var saved = localStorage.getItem('lang');
+          if (!saved) {
+            var n = navigator.language || navigator.userLanguage || 'ko';
+            saved = /^en/i.test(n) ? 'en' : 'ko';
+          }
+          var target = saved === 'en' ? '/en/' : '/ko/';
+          if (location.pathname !== target) location.replace(target);
+        } catch (e) {
+          location.replace('/ko/');
+        }
+      })();
+    </script>
+    <style>
+      html,body{height:100%}
+      body{display:grid;place-items:center;font:14px/1.6 system-ui, -apple-system, Segoe UI, Roboto, Arial}
+      .hint{opacity:.7}
+    </style>
+  </head>
+  <body>
+    <noscript>
+      <p class="hint">Redirecting… <a href="/ko/">한국어</a> · <a href="/en/">English</a></p>
+    </noscript>
+  </body>
+</html>

@@ -1,0 +1,90 @@
+---
+const { ko, en } = Astro.props as { ko?: string; en?: string };
+const hasKo = Boolean(ko);
+const hasEn = Boolean(en);
+---
+
+<nav aria-label="Language switch" class="my-4">
+  <!-- Accessible label for screen readers -->
+  <label for="lang-switch" class="sr-only">Language</label>
+
+  <!-- Select-based language switch -->
+  <select
+    id="lang-switch"
+    class="px-1 py-1 rounded-md bg-muted border border-border text-sm"
+    aria-label="Select language"
+  >
+    {hasKo && <option value={ko}>한국어</option>}
+    {hasEn && <option value={en}>English</option>}
+  </select>
+
+  <!-- No-JS fallback -->
+  <noscript>
+    <div class="inline-flex gap-2 ml-2 align-middle">
+      {
+        hasKo && (
+          <a class="tag" href={ko}>
+            한국어
+          </a>
+        )
+      }
+      {
+        hasEn && (
+          <a class="tag" href={en}>
+            English
+          </a>
+        )
+      }
+    </div>
+  </noscript>
+
+  <script is:inline>
+    (function () {
+      try {
+        var sel = document.getElementById("lang-switch");
+        if (!sel) return;
+
+        // Initialize selection: prefer URL prefix, then stored preference, else 'ko'
+        var currentLang = (function () {
+          if (location.pathname.startsWith("/en/")) return "en";
+          if (location.pathname.startsWith("/ko/")) return "ko";
+          var saved = localStorage.getItem("lang");
+          if (saved === "ko" || saved === "en") return saved;
+          return "ko";
+        })();
+
+        // Pick the option that matches the current language if both options exist
+        var setInitialByLang = function (lang) {
+          for (var i = 0; i < sel.options.length; i++) {
+            var opt = sel.options[i];
+            try {
+              var href = new URL(opt.value, location.origin);
+              var seg = href.pathname.split("/").filter(Boolean)[0] || "ko";
+              if (
+                (lang === "en" && seg === "en") ||
+                (lang === "ko" && seg === "ko")
+              ) {
+                sel.selectedIndex = i;
+                return;
+              }
+            } catch (_) {}
+          }
+          // Fallback to first option
+          sel.selectedIndex = 0;
+        };
+        setInitialByLang(currentLang);
+
+        // On change, redirect and persist preference
+        sel.addEventListener("change", function () {
+          var value = sel.value;
+          try {
+            var href = new URL(value, location.origin);
+            var seg = href.pathname.split("/").filter(Boolean)[0] || "ko";
+            localStorage.setItem("lang", seg === "en" ? "en" : "ko");
+          } catch (_) {}
+          location.href = value;
+        });
+      } catch (_) {}
+    })();
+  </script>
+</nav>

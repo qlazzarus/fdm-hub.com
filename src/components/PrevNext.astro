@@ -1,0 +1,39 @@
+---
+const {
+  prev,
+  next,
+  lang = "ko",
+} = Astro.props as {
+  prev?: { slug: string; title: string } | null;
+  next?: { slug: string; title: string } | null;
+  lang?: "ko" | "en";
+};
+function url(slug?: string) {
+  return slug ? `/${lang}/${slug}/` : "#";
+}
+---
+
+<nav class="mt-8 grid gap-3 sm:grid-cols-2">
+  <a
+    href={prev ? url(prev.slug) : undefined}
+    class="card block"
+    aria-disabled={!prev}
+    style={!prev ? "pointer-events:none;opacity:.5" : ""}
+  >
+    <div class="text-xs opacity-70 mb-1">← Previous</div>
+    <div class="font-medium line-clamp-2">
+      {prev ? prev.title : "No previous post"}
+    </div>
+  </a>
+  <a
+    href={next ? url(next.slug) : undefined}
+    class="card block"
+    aria-disabled={!next}
+    style={!next ? "pointer-events:none;opacity:.5" : ""}
+  >
+    <div class="text-xs opacity-70 mb-1 text-right">Next →</div>
+    <div class="font-medium line-clamp-2 text-right">
+      {next ? next.title : "No next post"}
+    </div>
+  </a>
+</nav>

@@ -1,0 +1,247 @@
+---
+import "../styles/global.css";
+import LangSwitch from "@components/LangSwitch.astro";
+import type { Lang } from "@utils/i18n";
+const {
+  lang,
+  title = "FDM Hub",
+  description = "",
+} = Astro.props as {
+  lang: Lang;
+  title?: string;
+  description?: string;
+};
+
+// Build KO/EN URLs for the current path by swapping the first segment.
+const pathname = Astro.url.pathname;
+function swapLang(pathname: string, to: "ko" | "en") {
+  const parts = pathname.split("/").filter(Boolean);
+  if (parts.length === 0) return `/${to}/`;
+  if (parts[0] === "ko" || parts[0] === "en") parts[0] = to;
+  else parts.unshift(to);
+  const trailing = pathname.endsWith("/") ? "/" : "";
+  return "/" + parts.join("/") + trailing;
+}
+const koUrl = swapLang(pathname, "ko");
+const enUrl = swapLang(pathname, "en");
+
+// Lang-aware base prefix and menu URLs
+const base = `/${lang}`;
+function urlOf(path: string) {
+  return `${base}${path}`;
+}
+const MENU = [
+  { key: "about", label: "About", href: urlOf("/about/"), icon: "ℹ️" },
+  { key: "posts", label: "Posts", href: urlOf("/"), icon: "📰" },
+  { key: "printers", label: "Printers", href: urlOf("/printers/"), icon: "🖨️" },
+  // { key: "materials", label: "Materials", href: urlOf("/filaments/"), icon: "🧵" },
+];
+
+// Active route detection (prefix match, with special case for posts index)
+function isActive(href: string) {
+  const p = Astro.url.pathname;
+  if (href.endsWith("//")) href = href.replace(/\/+$/, "/"); // normalize
+  if (href === urlOf("/"))
+    return (
+      p === urlOf("/") ||
+      p.startsWith(urlOf("/tags/")) ||
+      /^\/(ko|en)\/[0-9]{4}\//.test(p)
+    );
+  return p === href || p.startsWith(href);
+}
+---
+
+<!doctype html>
+<html lang={lang}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="icon" href="/favicon.svg" />
+    <script is:inline>
+      // Early theme init to prevent flash (FOUC)
+      (function () {
+        try {
+          const saved = localStorage.getItem("theme"); // 'dark' | 'light' | null
+          const prefersDark = window.matchMedia(
+            "(prefers-color-scheme: dark)"
+          ).matches;
+          const theme = saved || (prefersDark ? "dark" : "light");
+          const root = document.documentElement;
+          if (theme === "dark") root.classList.add("dark");
+          else root.classList.remove("dark");
+        } catch {}
+      })();
+    </script>
+  </head>
+  <body>
+    <header
+      class="sticky top-0 z-40 bg-bg/90 border-b border-border supports-[backdrop-filter]:backdrop-blur"
+    >
+      <nav
+        class="flex items-center justify-between gap-3 py-2 md:grid md:grid-cols-[auto_1fr_auto] md:gap-4"
+      >
+        <a
+          href="/"
+          aria-label="Home"
+          class="font-semibold tracking-tight whitespace-nowrap">FDM Hub</a
+        >
+
+        <!-- Desktop main menu (same row as logo/controls) -->
+        <ul
+          class="hidden md:inline-flex items-center justify-self-center gap-6 text-base whitespace-nowrap"
+        >
+          {
+            MENU.map((m) => (
+              <li>
+                <a
+                  href={m.href}
+                  class={`px-1 py-2 border-b-2 transition-colors -mb-[1px] ${
+                    isActive(m.href)
+                      ? "border-brand text-fg font-medium"
+                      : "border-transparent text-mutedFg hover:text-fg hover:border-border"
+                  }`}
+                  aria-current={isActive(m.href) ? "page" : undefined}
+                >
+                  {m.label}
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+
+        <div class="flex items-center gap-3 text-sm justify-self-end">
+          <LangSwitch ko={koUrl} en={enUrl} />
+          <button
+            id="theme-toggle"
+            type="button"
+            class="h-9 px-3 rounded-md border border-border bg-muted hover:bg-muted/80 transition-colors"
+            aria-label="Toggle dark mode"
+          >
+            <span id="theme-label" class="text-xs">Dark</span>
+          </button>
+        </div>
+      </nav>
+
+      <!-- Mobile main menu (segmented tabs with snap + edge fade) -->
+      <div class="md:hidden mt-1 mb-2">
+        <div class="relative -mx-4 px-4">
+          <!-- Edge fade hints -->
+          <div
+            class="pointer-events-none absolute inset-y-0 left-0 w-6 bg-gradient-to-r from-bg to-transparent"
+          >
+          </div>
+          <div
+            class="pointer-events-none absolute inset-y-0 right-0 w-6 bg-gradient-to-l from-bg to-transparent"
+          >
+          </div>
+
+          <ul
+            class="flex items-center gap-2 overflow-x-auto snap-x snap-mandatory whitespace-nowrap h-11
+                   scrollbar-none [-ms-overflow-style:none] [scrollbar-width:none]"
+          >
+            {
+              MENU.map((m) => (
+                <li class="snap-start">
+                  <a
+                    href={m.href}
+                    class={`inline-flex items-center gap-1.5 h-9 px-3 rounded-full text-sm border transition-colors ${
+                      isActive(m.href)
+                        ? "bg-brand text-brandFg border-brand"
+                        : "bg-muted text-mutedFg border-border hover:bg-muted/80"
+                    }`}
+                    aria-current={isActive(m.href) ? "page" : undefined}
+                  >
+                    {m.icon && <span aria-hidden>{m.icon}</span>}
+                    <span>{m.label}</span>
+                  </a>
+                </li>
+              ))
+            }
+          </ul>
+        </div>
+      </div>
+      <style is:global>
+        header select {
+          height: 2.25rem; /* h-9 */
+          padding-top: 0.25rem;
+          padding-bottom: 0.25rem;
+        }
+      </style>
+    </header>
+    <script is:inline>
+      // add subtle shadow when scrolled
+      (function () {
+        const header = document.querySelector("header");
+        let ticking = false;
+        function onScroll() {
+          if (!ticking) {
+            window.requestAnimationFrame(() => {
+              const scrolled = window.scrollY > 2;
+              header?.classList.toggle("shadow-sm", scrolled);
+              ticking = false;
+            });
+            ticking = true;
+          }
+        }
+        window.addEventListener("scroll", onScroll, { passive: true });
+        onScroll();
+      })();
+    </script>
+
+    <main>
+      <slot />
+    </main>
+
+    <footer class="border-t border-border">
+      <small class="opacity-70 text-sm"
+        >© {new Date().getFullYear()} fdm-hub.com · Built with Astro</small
+      >
+    </footer>
+    <script is:inline>
+      (function () {
+        const root = document.documentElement;
+        const btn = document.getElementById("theme-toggle");
+        const label = document.getElementById("theme-label");
+
+        function currentIsDark() {
+          return root.classList.contains("dark");
+        }
+        function setTheme(dark) {
+          if (dark) root.classList.add("dark");
+          else root.classList.remove("dark");
+          try {
+            localStorage.setItem("theme", dark ? "dark" : "light");
+          } catch {}
+          updateLabel();
+        }
+        function updateLabel() {
+          if (!label) return;
+          if (currentIsDark()) {
+            label.textContent = "🌙 Dark";
+          } else {
+            label.textContent = "🌞 Light";
+          }
+        }
+
+        // initialize label on load
+        updateLabel();
+
+        btn?.addEventListener("click", () => setTheme(!currentIsDark()));
+
+        // Optional: keep in sync if user changes OS theme and no explicit preference saved
+        try {
+          const mq = window.matchMedia("(prefers-color-scheme: dark)");
+          mq.addEventListener?.("change", (e) => {
+            const saved = localStorage.getItem("theme");
+            if (!saved) {
+              // only follow system if user hasn't chosen
+              setTheme(!!e.matches);
+            }
+          });
+        } catch {}
+      })();
+    </script>
+  </body>
+</html>

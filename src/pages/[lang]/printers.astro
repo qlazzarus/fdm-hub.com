@@ -1,0 +1,250 @@
+---
+import Layout from "@components/Layout.astro";
+import Seo from "@components/Seo.astro";
+import { t } from "@utils/i18n";
+import printersClientUrl from "../../scripts/printers.ts?url";
+
+export async function getStaticPaths() {
+  return [
+    { params: { lang: "ko" }, props: { lang: "ko" } },
+    { params: { lang: "en" }, props: { lang: "en" } },
+  ];
+}
+
+const { lang } = Astro.params as { lang: "ko" | "en" };
+const isEN = lang === "en";
+const title = t("printers.kr.title", lang);
+const desc = t("printers.kr.desc", lang);
+---
+
+<Layout lang={lang} title={title} description={desc}>
+  <div
+    id="printersKR-root"
+    data-lang={lang}
+    data-is-en={isEN ? "true" : "false"}
+    data-brand-label={t("printers.kr.allBrands", lang)}
+    data-last-updated-label={t("printers.kr.lastUpdatedPrefix", lang)}
+    data-details-label={t("printers.kr.details", lang)}
+    data-tags-label={t("printers.kr.tags", lang)}
+    data-features-label={t("printers.kr.features", lang)}
+    data-pros-label={t("printers.kr.pros", lang)}
+    data-cons-label={t("printers.kr.cons", lang)}
+    data-close-label={t("printers.kr.close", lang)}
+  >
+    <Seo
+      title={title}
+      description={desc}
+      lang={lang}
+      canonical={`/${lang}/printers/`}
+    />
+
+    <!-- Filters -->
+    <section class="mb-4 px-3 md:px-0 overflow-x-clip">
+      <h1 class="text-2xl font-bold mb-3">{title}</h1>
+      <p id="lastUpdated" class="-mt-2 mb-2 text-xs text-mutedFg"></p>
+      <div
+        class="w-full max-w-full rounded-xl border border-border bg-card/60 md:supports-[backdrop-filter]:backdrop-blur p-3 md:p-4 shadow-sm"
+      >
+        <div class="grid gap-2 grid-cols-1 md:grid-cols-12">
+          <input
+            id="q"
+            type="search"
+            placeholder={t("printers.kr.searchPlaceholder", lang)}
+            class="h-10 px-3 rounded-md border border-border bg-card w-full max-w-full min-w-0 box-border col-span-1 md:col-span-12 md:order-last"
+          />
+
+          <select
+            id="brand"
+            class="h-10 px-3 rounded-md border border-border bg-card w-full max-w-full min-w-0 box-border col-span-1 md:col-span-3 appearance-none"
+          >
+            <option value="">{t("printers.kr.allBrands", lang)}</option>
+          </select>
+
+          <select
+            id="motion"
+            class="h-10 px-3 rounded-md border border-border bg-card w-full max-w-full min-w-0 box-border col-span-1 md:col-span-3 appearance-none"
+          >
+            <option value="">{t("printers.kr.allMotions", lang)}</option>
+            <option>CoreXY</option>
+            <option>BedSlinger</option>
+            <option>H-bot</option>
+            <option>CoreXZ</option>
+          </select>
+
+          <select
+            id="enclosed"
+            class="h-10 px-3 rounded-md border border-border bg-card w-full max-w-full min-w-0 box-border col-span-1 md:col-span-3 appearance-none"
+          >
+            <option value="">{t("printers.kr.openEnclosed", lang)}</option>
+            <option value="true">{t("printers.kr.enclosed", lang)}</option>
+            <option value="false">{t("printers.kr.open", lang)}</option>
+          </select>
+
+          <select
+            id="speed"
+            class="h-10 px-3 rounded-md border border-border bg-card w-full max-w-full min-w-0 box-border col-span-1 md:col-span-3 appearance-none"
+          >
+            <option value="">{t("printers.kr.anySpeed", lang)}</option>
+            <option value="150">≥ 150 mm/s</option>
+            <option value="200">≥ 200 mm/s</option>
+            <option value="300">≥ 300 mm/s</option>
+            <option value="500">≥ 500 mm/s</option>
+          </select>
+
+          <select
+            id="volume"
+            class="h-10 px-3 rounded-md border border-border bg-card w-full max-w-full min-w-0 box-border col-span-1 md:col-span-3 appearance-none"
+          >
+            <option value="">{t("printers.kr.anyVolume", lang)}</option>
+            <option value="200">≥ 200³</option>
+            <option value="256">≥ 256³</option>
+            <option value="300">≥ 300³</option>
+          </select>
+
+          <select
+            id="price"
+            class="h-10 px-3 rounded-md border border-border bg-card w-full max-w-full min-w-0 box-border col-span-1 md:col-span-3 appearance-none"
+          >
+            <option value="">{t("printers.kr.anyPrice", lang)}</option>
+            <option value="300000">≤ KRW 300,000</option>
+            <option value="500000">≤ KRW 500,000</option>
+            <option value="1000000">≤ KRW 1,000,000</option>
+            <option value="2000000">≤ KRW 2,000,000</option>
+          </select>
+        </div>
+      </div>
+    </section>
+
+    <!-- Table -->
+    <div
+      class="overflow-x-auto border border-border rounded-lg bg-card shadow-sm"
+    >
+      <table class="w-full text-sm table-auto break-words">
+        <colgroup>
+          <col class="min-w-[80px]" />
+          <col class="min-w-[120px] md:w-[160px]" />
+          <col class="min-w-[220px] md:w-[220px]" />
+          <col class="min-w-[120px] md:w-[140px]" />
+          <col class="min-w-[140px] md:w-[160px]" />
+          <col class="min-w-[120px] md:w-[140px]" />
+          <col class="min-w-[120px] md:w-[140px]" />
+          <col class="min-w-[160px] md:w-[180px]" />
+          <col class="min-w-[100px]" />
+        </colgroup>
+        <thead
+          class="bg-muted/80 text-mutedFg supports-[backdrop-filter]:backdrop-blur"
+        >
+          <tr>
+            <th class="text-left px-3 py-2 w-[64px] min-w-[64px]"
+              >{t("printers.kr.th.image", lang)}</th
+            >
+            <th class="text-left px-3 py-2"
+              ><button data-sort="brand" class="thbtn"
+                >{t("printers.kr.th.brand", lang)}
+                <span class="sort-indicator"></span></button
+              ></th
+            >
+            <th class="text-left px-3 py-2"
+              ><button data-sort="model" class="thbtn"
+                >{t("printers.kr.th.model", lang)}
+                <span class="sort-indicator"></span></button
+              ></th
+            >
+            <th class="text-left px-3 py-2"
+              ><button data-sort="motion" class="thbtn"
+                >{t("printers.kr.th.motion", lang)}
+                <span class="sort-indicator"></span></button
+              ></th
+            >
+            <th class="text-left px-3 py-2"
+              ><button data-sort="volume" class="thbtn"
+                >{t("printers.kr.th.build", lang)}
+                <span class="sort-indicator"></span></button
+              ></th
+            >
+            <th class="text-right px-3 py-2"
+              ><button
+                data-sort="speed"
+                class="thbtn w-full text-right whitespace-nowrap"
+                >{t("printers.kr.th.speedTyp", lang)}
+                <span class="sort-indicator"></span></button
+              ></th
+            >
+            <th class="text-right px-3 py-2"
+              ><button
+                data-sort="price"
+                class="thbtn w-full text-right whitespace-nowrap"
+                >{t("printers.kr.th.priceKRW", lang)}
+                <span class="sort-indicator"></span></button
+              ></th
+            >
+            <th class="text-center px-3 py-2"
+              >{t("printers.kr.th.stores", lang)}
+            </th>
+            <th class="text-center px-3 py-2"
+              ><button data-sort="info" class="thbtn"
+                >{t("printers.kr.th.info", lang)}</button
+              ></th
+            >
+          </tr>
+        </thead>
+        <style is:inline>
+          td,
+          th {
+            white-space: normal !important;
+            word-break: break-word !important;
+            vertical-align: middle;
+          }
+          .thbtn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.25rem;
+            font-weight: 600;
+            cursor: pointer;
+            user-select: none;
+          }
+          .thbtn:hover {
+            opacity: 0.85;
+          }
+          .sort-indicator {
+            opacity: 0.7;
+            font-size: 0.85em;
+          }
+          .thumb {
+            width: 56px;
+            height: 56px;
+            object-fit: cover;
+            border-radius: 0.375rem;
+          }
+        </style>
+        <tbody id="rows"></tbody>
+      </table>
+    </div>
+
+    <!-- Pagination -->
+    <nav id="pager" class="hidden mt-4 flex justify-center gap-2 text-sm"></nav>
+
+    <!-- Lightweight Modal -->
+    <div id="printerModal" class="fixed inset-0 z-50 hidden">
+      <div class="absolute inset-0 bg-black/50" data-close="1"></div>
+      <div
+        class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[92vw] max-w-xl rounded-lg border border-border bg-card shadow-lg p-4 md:p-6"
+      >
+        <div class="flex items-center justify-between mb-3">
+          <h3 id="pm-title" class="text-lg font-semibold"></h3>
+          <button
+            id="pm-close"
+            class="px-2 py-1 rounded-md border border-border hover:bg-muted text-sm"
+          ></button>
+        </div>
+        <div id="pm-body" class="space-y-3 text-sm"></div>
+      </div>
+    </div>
+
+    <p class="mt-2 text-xs opacity-70">
+      {t("printers.kr.disclaimer", lang)}
+    </p>
+
+    <script type="module" src={printersClientUrl}></script>
+  </div>
+</Layout>

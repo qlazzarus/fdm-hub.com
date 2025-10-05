@@ -1,0 +1,43 @@
+---
+import Layout from "@components/Layout.astro";
+import { getLangFromUrl, t } from "@utils/i18n";
+const lang = getLangFromUrl(Astro.url.pathname);
+---
+
+<Layout
+  lang={lang}
+  title={t("404.title", lang)}
+  description={t("404.desc", lang)}
+>
+  <section class="mx-auto max-w-3xl text-center px-4 py-10">
+    <div
+      class="mb-6 inline-block overflow-hidden rounded-2xl border border-border bg-card shadow-md"
+    >
+      <div class="w-full max-w-[720px]">
+        <!-- Replace the src below with your actual file path under /public/img/ -->
+        <img
+          src="/img/404-fdm.png"
+          alt={lang === "en"
+            ? "3D printer and makers illustration"
+            : "3D 프린터와 메이커 일러스트"}
+          class="block w-full h-auto object-cover"
+          width="1200"
+          height="800"
+          loading="eager"
+          decoding="async"
+        />
+      </div>
+    </div>
+
+    <h1 class="text-2xl sm:text-3xl font-bold mb-2">{t("404.title", lang)}</h1>
+    <p class="opacity-80 mb-6">{t("404.desc", lang)}</p>
+
+    <a
+      href="/"
+      class="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-brand text-brandFg hover:bg-brand/90 transition-colors"
+    >
+      <span aria-hidden>🏠</span>
+      <span>{lang === "en" ? "Go Home" : "홈으로 가기"}</span>
+    </a>
+  </section>
+</Layout>

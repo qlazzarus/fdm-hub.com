@@ -1,0 +1,23 @@
+---
+const {
+  label,
+  count,
+  lang = "ko",
+} = Astro.props as {
+  label: string;
+  count?: number;
+  lang?: "ko" | "en";
+};
+---
+
+<div
+  class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-brand text-brandFg"
+>
+  <span aria-hidden>🏷️</span>
+  <h1 class="text-sm">{label}</h1>
+  {
+    typeof count === "number" && (
+      <span class="text-xs opacity-90">({count})</span>
+    )
+  }
+</div>

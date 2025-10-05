@@ -1,0 +1,20 @@
+---
+const { links = [], disclosure } = Astro.props as { links: {label:string; url:string}[]; disclosure?: string };
+---
+{links.length > 0 && (
+  <aside class="card bg-muted" aria-label="Affiliate Links">
+    <div class="flex items-center justify-between mb-2">
+      <strong>Affiliate</strong>
+      {disclosure && <span class="text-xs opacity-70">{disclosure}</span>}
+    </div>
+    <ul class="list-disc pl-5 space-y-1">
+      {links.map((l) => (
+        <li>
+          <a class="hover:text-brand" href={l.url} rel="sponsored noopener" target="_blank">
+            {l.label} <span aria-hidden>↗︎</span>
+          </a>
+        </li>
+      ))}
+    </ul>
+  </aside>
+)}

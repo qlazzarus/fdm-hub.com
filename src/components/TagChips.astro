@@ -1,0 +1,81 @@
+---
+// Upgraded TagChips component
+// Props:
+//  - tags: string[]                 (required)
+//  - lang?: 'ko'|'en'               (default 'ko')
+//  - active?: string                (current tag slug or label to highlight)
+//  - limit?: number                 (max chips to render)
+//  - variant?: 'filled'|'outline'   (visual style; default 'filled')
+//  - size?: 'sm'|'md'               (chip size; default 'sm')
+//  - showIcon?: boolean             (prefix icon; default true)
+const {
+  tags = [],
+  lang = "ko",
+  active,
+  limit,
+  variant = "filled",
+  size = "sm",
+  showIcon = true,
+} = Astro.props as {
+  tags?: string[];
+  lang?: "ko" | "en";
+  active?: string;
+  limit?: number;
+  variant?: "filled" | "outline";
+  size?: "sm" | "md";
+  showIcon?: boolean;
+};
+
+function slugify(s: string) {
+  return s
+    .toLowerCase()
+    .normalize("NFKD")
+    .replace(/[^\w\s-]/g, "")
+    .trim()
+    .replace(/\s+/g, "-");
+}
+
+const list = Array.isArray(tags)
+  ? typeof limit === "number"
+    ? tags.slice(0, limit)
+    : tags
+  : [];
+---
+
+{
+  list?.length > 0 && (
+    <nav aria-label={lang === "en" ? "Tags" : "태그"}>
+      <ul class="mt-3 flex flex-wrap gap-1.5">
+        {list.map((t) => {
+          const slug = slugify(t);
+          const isActive =
+            active &&
+            (slugify(active) === slug || slugify(active) === slugify(t));
+          const base =
+            "inline-flex items-center gap-1.5 rounded-full transition-all border focus:outline-none focus-visible:ring-2 focus-visible:ring-brand";
+          const sizing =
+            size === "md" ? "px-3 py-1 text-sm" : "px-2 py-0.5 text-xs";
+          const styleFilled = isActive
+            ? "bg-brand text-brandFg border-brand hover:bg-brand/90"
+            : "bg-muted text-mutedFg border-border hover:bg-muted/80";
+          const styleOutline = isActive
+            ? "bg-brand/10 text-brand border-brand hover:bg-brand/20"
+            : "bg-transparent text-mutedFg border-border hover:bg-muted";
+          const style = variant === "outline" ? styleOutline : styleFilled;
+          return (
+            <li>
+              <a
+                href={`/${lang}/tags/${slug}/`}
+                class={`${base} ${sizing} ${style} will-change-transform hover:-translate-y-0.5`}
+                title={t}
+              >
+                {showIcon && <span aria-hidden>🏷️</span>}
+                <span class="max-w-[18ch] truncate">{t}</span>
+              </a>
+            </li>
+          );
+        })}
+      </ul>
+    </nav>
+  )
+}

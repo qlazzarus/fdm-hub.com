@@ -1,0 +1,17 @@
+---
+import PostCard from "@components/PostCard.astro";
+const { posts = [] } = Astro.props as { posts: any[] };
+---
+
+{
+  posts?.length > 0 && (
+    <section class="mt-8">
+      <h2 class="text-lg font-semibold mb-3">Related</h2>
+      <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        {posts.map((p) => (
+          <PostCard post={p} />
+        ))}
+      </div>
+    </section>
+  )
+}

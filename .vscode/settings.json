@@ -1,0 +1,28 @@
+{
+  // 저장 시 자동 포맷
+  "editor.formatOnSave": true,
+
+  // 파일 저장 시 import 정리도 함께
+  "editor.codeActionsOnSave": {
+    "source.organizeImports": "always"
+  },
+
+  // Astro 파일 포맷터 지정
+  "[astro]": {
+    "editor.defaultFormatter": "astro-build.astro-vscode"
+  },
+
+  // Typescript/TSX/JSX는 Prettier 사용 (필요 시)
+  "[javascript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[typescript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[typescriptreact]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[json]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  }
+}
