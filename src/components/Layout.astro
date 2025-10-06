@@ -74,6 +74,17 @@ function isActive(href: string) {
         } catch {}
       })();
     </script>
+    <!-- ✅ Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-5KY4VZEEGL"
+    ></script>
+    <script is:inline>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+      gtag("config", "G-5KY4VZEEGL");
+    </script>
   </head>
   <body>
     <header
