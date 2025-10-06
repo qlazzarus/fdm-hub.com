@@ -2,7 +2,7 @@
 import Layout from "@components/Layout.astro";
 import Seo from "@components/Seo.astro";
 import { t } from "@utils/i18n";
-import printersClientUrl from "../../scripts/printers.ts?url";
+import "../../scripts/printers.ts";
 
 export async function getStaticPaths() {
   return [
@@ -245,6 +245,6 @@ const desc = t("printers.kr.desc", lang);
       {t("printers.kr.disclaimer", lang)}
     </p>
 
-    <script type="module" src={printersClientUrl}></script>
+    <script type="module" src="../../scripts/printers.ts"></script>
   </div>
 </Layout>
