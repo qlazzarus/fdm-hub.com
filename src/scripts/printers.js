@@ -2,7 +2,7 @@
 // Handles filtering, sorting, and pagination dynamically.
 
 (function () {
-  const root = document.getElementById('printersKR-root') as HTMLElement | null;
+  const root = document.getElementById('printersKR-root');
   if (!root) return;
 
   const lang = root.getAttribute('data-lang') || 'ko';
@@ -17,66 +17,67 @@
 
   const PER_PAGE = 15;
 
-  const $q = document.getElementById('q') as HTMLInputElement | null;
-  const $brand = document.getElementById('brand') as HTMLSelectElement | null;
-  const $motion = document.getElementById('motion') as HTMLSelectElement | null;
-  const $enclosed = document.getElementById('enclosed') as HTMLSelectElement | null;
-  const $speed = document.getElementById('speed') as HTMLSelectElement | null;
-  const $volume = document.getElementById('volume') as HTMLSelectElement | null;
-  const $price = document.getElementById('price') as HTMLSelectElement | null;
-  const $rows = document.getElementById('rows') as HTMLElement | null;
-  const $pager = document.getElementById('pager') as HTMLElement | null;
-  const $modal = document.getElementById('printerModal') as HTMLElement | null;
-  const $pmTitle = document.getElementById('pm-title') as HTMLElement | null;
-  const $pmBody = document.getElementById('pm-body') as HTMLElement | null;
-  const $pmClose = document.getElementById('pm-close') as HTMLElement | null;
+  const $q = document.getElementById('q');
+  const $brand = document.getElementById('brand');
+  const $motion = document.getElementById('motion');
+  const $enclosed = document.getElementById('enclosed');
+  const $speed = document.getElementById('speed');
+  const $volume = document.getElementById('volume');
+  const $price = document.getElementById('price');
+  const $rows = document.getElementById('rows');
+  const $pager = document.getElementById('pager');
+  const $modal = document.getElementById('printerModal');
+  const $pmTitle = document.getElementById('pm-title');
+  const $pmBody = document.getElementById('pm-body');
+  const $pmClose = document.getElementById('pm-close');
 
   function openModal() { if ($modal) $modal.classList.remove('hidden'); }
   function closeModal() { if ($modal) $modal.classList.add('hidden'); }
 
-  $pmClose?.addEventListener('click', closeModal);
-  $modal?.addEventListener('click', (e) => {
-    const t = e.target as HTMLElement;
-    if (t && t.getAttribute('data-close') === '1') closeModal();
-  });
+  if ($pmClose) $pmClose.addEventListener('click', closeModal);
+  if ($modal) {
+    $modal.addEventListener('click', (e) => {
+      const t = e.target;
+      if (t && t.getAttribute('data-close') === '1') closeModal();
+    });
+  }
   window.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeModal(); });
 
-  let data: any[] = [];
-  let brands: string[] = [];
+  let data = [];
+  let brands = [];
 
-  // 기본 정렬: 브랜드 오름차순 (A→Z)
-  let sortKey: 'rec' | 'brand' | 'model' | 'motion' | 'volume' | 'speed' | 'price' = 'brand';
-  let sortDir: 'asc' | 'desc' = 'asc';
+  let sortKey = 'brand';
+  let sortDir = 'asc';
 
-  function speedValue(p: any) {
+  function speedValue(p) {
     return (p && (p.typicalSpeed || p.maxSpeed)) || 0;
   }
 
-  function volumeValue(p: any) {
+  function volumeValue(p) {
     if (!p || !p.build) return 0;
-    const x = Number(p.build.x || 0),
-      y = Number(p.build.y || 0),
-      z = Number(p.build.z || 0);
+    const x = Number(p.build.x || 0);
+    const y = Number(p.build.y || 0);
+    const z = Number(p.build.z || 0);
     return Math.min(x, y, z);
   }
 
-  function priceValue(p: any) {
+  function priceValue(p) {
     return typeof p?.priceKRW === 'number' ? p.priceKRW : Infinity;
   }
 
-  function text(a: any) {
+  function text(a) {
     return (a || '').toString().toLowerCase();
   }
 
-  function volCube(v: any) {
+  function volCube(v) {
     if (!v) return 0;
-    const x = Number(v.x || 0),
-      y = Number(v.y || 0),
-      z = Number(v.z || 0);
+    const x = Number(v.x || 0);
+    const y = Number(v.y || 0);
+    const z = Number(v.z || 0);
     return Math.min(x, y, z);
   }
 
-  function fmtKRW(n: any) {
+  function fmtKRW(n) {
     try {
       return Number(n).toLocaleString('ko-KR');
     } catch {
@@ -86,8 +87,8 @@
 
   function updateIndicators() {
     document.querySelectorAll('thead .thbtn').forEach((btn) => {
-      const k = (btn as HTMLElement).getAttribute('data-sort');
-      const ind = (btn as HTMLElement).querySelector('.sort-indicator') as HTMLElement | null;
+      const k = btn.getAttribute('data-sort');
+      const ind = btn.querySelector('.sort-indicator');
       if (!ind) return;
       if (k === sortKey) ind.textContent = sortDir === 'asc' ? '▲' : '▼';
       else ind.textContent = '';
@@ -96,16 +97,16 @@
 
   function updateAriaSort() {
     document.querySelectorAll('thead .thbtn').forEach((btn) => {
-      const th = (btn as HTMLElement).closest('th');
+      const th = btn.closest('th');
       if (!th) return;
-      const k = (btn as HTMLElement).getAttribute('data-sort');
+      const k = btn.getAttribute('data-sort');
       if (k === sortKey)
         th.setAttribute('aria-sort', sortDir === 'asc' ? 'ascending' : 'descending');
       else th.removeAttribute('aria-sort');
     });
   }
 
-  function render(list: any[], page = 1) {
+  function render(list, page = 1) {
     if (!$rows || !$pager) return;
     const totalPages = Math.max(1, Math.ceil(list.length / PER_PAGE));
     const start = (page - 1) * PER_PAGE;
@@ -124,7 +125,7 @@
         <td class="px-3 py-2 text-right">${p.typicalSpeed ? p.typicalSpeed + ' mm/s' : (p.maxSpeed ? '≤ ' + p.maxSpeed + ' mm/s' : '-')}</td>
         <td class="px-3 py-2 text-right">${typeof p.priceKRW === 'number' ? '₩' + fmtKRW(p.priceKRW) : '-'}</td>
         <td class="px-3 py-2 text-center">
-          ${Array.isArray(p.stores) && p.stores.length ? p.stores.map((s: any) => `<a class="px-2 py-1 rounded bg-brand text-brandFg hover:bg-brand/90 inline-block mr-1 mb-1" href="${s.url}" target="_blank" rel="nofollow noopener">${s.name}</a>`).join('') : '-'}
+          ${Array.isArray(p.stores) && p.stores.length ? p.stores.map((s) => `<a class="px-2 py-1 rounded bg-brand text-brandFg hover:bg-brand/90 inline-block mr-1 mb-1" href="${s.url}" target="_blank" rel="nofollow noopener">${s.name}</a>`).join('') : '-'}
         </td>
         <td class="px-3 py-2 text-center">
           <button type="button" class="info-btn px-2 py-1 rounded-md border border-border hover:bg-muted text-sm" data-key="${encodeURIComponent((p.brand||'') + '||' + (p.model||'') + '||' + (p.year||''))}">${detailsLabel}</button>
@@ -132,7 +133,6 @@
       </tr>
     `).join('');
 
-    // 페이지네이션 표시
     if (totalPages > 1) {
       $pager.classList.remove('hidden');
       $pager.innerHTML = Array.from({ length: totalPages }, (_, i) => i + 1)
@@ -148,7 +148,7 @@
       $pager.querySelectorAll('a').forEach((a) => {
         a.addEventListener('click', (e) => {
           e.preventDefault();
-          const p = Number((a as HTMLElement).getAttribute('data-page') || '1');
+          const p = Number(a.getAttribute('data-page') || '1');
           render(list, p);
         });
       });
@@ -179,32 +179,17 @@
       return okKR && okQ && okB && okM && okE && okS && okV && okP;
     });
 
-    // 정렬
     list.sort((a, b) => {
       let diff = 0;
       switch (sortKey) {
-        case 'brand':
-          diff = text(a.brand).localeCompare(text(b.brand));
-          break;
-        case 'model':
-          diff = text(a.model).localeCompare(text(b.model));
-          break;
-        case 'motion':
-          diff = text(a.motion).localeCompare(text(b.motion));
-          break;
-        case 'volume':
-          diff = volumeValue(a) - volumeValue(b);
-          break;
-        case 'speed':
-          diff = speedValue(a) - speedValue(b);
-          break;
-        case 'price':
-          diff = priceValue(a) - priceValue(b);
-          break;
+        case 'brand': diff = text(a.brand).localeCompare(text(b.brand)); break;
+        case 'model': diff = text(a.model).localeCompare(text(b.model)); break;
+        case 'motion': diff = text(a.motion).localeCompare(text(b.motion)); break;
+        case 'volume': diff = volumeValue(a) - volumeValue(b); break;
+        case 'speed': diff = speedValue(a) - speedValue(b); break;
+        case 'price': diff = priceValue(a) - priceValue(b); break;
         case 'rec':
-        default:
-          diff = (b.year || 0) - (a.year || 0);
-          break;
+        default: diff = (b.year || 0) - (a.year || 0); break;
       }
       return sortDir === 'asc' ? diff : -diff;
     });
@@ -212,7 +197,6 @@
     render(list, 1);
   }
 
-  // 데이터 로드 (신규 스키마: { lastUpdated, items: [...] } 지원)
   fetch('/data/printers.json')
     .then((r) => r.json())
     .then((json) => {
@@ -234,7 +218,6 @@
         const brandLabel = root.getAttribute('data-brand-label') || (isEN ? 'All brands' : '전체 브랜드');
         $brand.innerHTML = `<option value="">${brandLabel}</option>` + brands.map((b) => `<option value="${b}">${b}</option>`).join('');
       }
-      // 필요 시: const lastUpdated = !Array.isArray(json) ? json.lastUpdated : undefined;
       apply();
     })
     .catch(() => {
@@ -242,16 +225,15 @@
       apply();
     });
 
-  // 헤더 클릭 정렬
   document.querySelectorAll('thead .thbtn').forEach((btn) => {
     btn.addEventListener('click', () => {
-      const k = (btn as HTMLElement).getAttribute('data-sort');
+      const k = btn.getAttribute('data-sort');
       if (!k) return;
       if (sortKey === k) sortDir = sortDir === 'asc' ? 'desc' : 'asc';
       else {
-        sortKey = k as any;
+        sortKey = k;
         sortDir = k === 'brand' || k === 'model' || k === 'motion' ? 'asc' : 'desc';
-        if (k === 'price') sortDir = 'asc'; // 가격은 항상 싼 순으로 기본화
+        if (k === 'price') sortDir = 'asc';
       }
       updateIndicators();
       updateAriaSort();
@@ -262,48 +244,49 @@
   updateIndicators();
   updateAriaSort();
 
-  // 필터 이벤트
   [$q, $brand, $motion, $enclosed, $speed, $volume, $price].forEach((el) => {
     if (!el) return;
     el.addEventListener('input', apply);
   });
 
-  $rows?.addEventListener('click', (e) => {
-    const btn = (e.target as HTMLElement).closest('.info-btn') as HTMLElement | null;
-    if (!btn) return;
-    const key = btn.getAttribute('data-key') || '';
-    const [b, m, y] = decodeURIComponent(key).split('||');
-    const item = data.find((x) => (x.brand||'') === b && (x.model||'') === m && String(x.year||'') === (y||''));
-    if (!item) return;
+  if ($rows) {
+    $rows.addEventListener('click', (e) => {
+      const btn = e.target.closest('.info-btn');
+      if (!btn) return;
+      const key = btn.getAttribute('data-key') || '';
+      const [b, m, y] = decodeURIComponent(key).split('||');
+      const item = data.find((x) => (x.brand||'') === b && (x.model||'') === m && String(x.year||'') === (y||''));
+      if (!item) return;
 
-    if ($pmTitle) $pmTitle.textContent = `${item.brand||''} ${item.model||''}`.trim();
+      if ($pmTitle) $pmTitle.textContent = `${item.brand||''} ${item.model||''}`.trim();
 
-    const tagChips = Array.isArray(item.tags) && item.tags.length
-      ? `<div class="flex flex-wrap gap-1">${item.tags.map((t:string)=>`<span class=\"px-2 py-0.5 rounded-full border border-border text-xs bg-muted\">${t}</span>`).join('')}</div>`
-      : '';
+      const tagChips = Array.isArray(item.tags) && item.tags.length
+        ? `<div class="flex flex-wrap gap-1">${item.tags.map((t)=>`<span class="px-2 py-0.5 rounded-full border border-border text-xs bg-muted">${t}</span>`).join('')}</div>`
+        : '';
 
-    const featuresList = Array.isArray(item.features) && item.features.length
-      ? `<ul class="list-disc pl-5">${item.features.map((f:string)=>`<li>${f}</li>`).join('')}</ul>`
-      : '';
+      const featuresList = Array.isArray(item.features) && item.features.length
+        ? `<ul class="list-disc pl-5">${item.features.map((f)=>`<li>${f}</li>`).join('')}</ul>`
+        : '';
 
-    const prosList = Array.isArray(item.pros) && item.pros.length
-      ? `<ul class="list-disc pl-5">${item.pros.map((f:string)=>`<li>${f}</li>`).join('')}</ul>`
-      : '';
+      const prosList = Array.isArray(item.pros) && item.pros.length
+        ? `<ul class="list-disc pl-5">${item.pros.map((f)=>`<li>${f}</li>`).join('')}</ul>`
+        : '';
 
-    const consList = Array.isArray(item.cons) && item.cons.length
-      ? `<ul class="list-disc pl-5">${item.cons.map((f:string)=>`<li>${f}</li>`).join('')}</ul>`
-      : '';
+      const consList = Array.isArray(item.cons) && item.cons.length
+        ? `<ul class="list-disc pl-5">${item.cons.map((f)=>`<li>${f}</li>`).join('')}</ul>`
+        : '';
 
-    if ($pmBody) {
-      $pmBody.innerHTML = `
-        ${tagChips ? `<div><div class=\"font-semibold mb-1\">${tagsLabel}</div>${tagChips}</div>` : ''}
-        ${featuresList ? `<div><div class=\"font-semibold mb-1\">${featuresLabel}</div>${featuresList}</div>` : ''}
-        ${prosList ? `<div><div class=\"font-semibold mb-1\">${prosLabel}</div>${prosList}</div>` : ''}
-        ${consList ? `<div><div class=\"font-semibold mb-1\">${consLabel}</div>${consList}</div>` : ''}
-      `;
-    }
+      if ($pmBody) {
+        $pmBody.innerHTML = `
+          ${tagChips ? `<div><div class="font-semibold mb-1">${tagsLabel}</div>${tagChips}</div>` : ''}
+          ${featuresList ? `<div><div class="font-semibold mb-1">${featuresLabel}</div>${featuresList}</div>` : ''}
+          ${prosList ? `<div><div class="font-semibold mb-1">${prosLabel}</div>${prosList}</div>` : ''}
+          ${consList ? `<div><div class="font-semibold mb-1">${consLabel}</div>${consList}</div>` : ''}
+        `;
+      }
 
-    if ($pmClose) $pmClose.textContent = closeLabel;
-    openModal();
-  });
+      if ($pmClose) $pmClose.textContent = closeLabel;
+      openModal();
+    });
+  }
 })();
