@@ -92,6 +92,23 @@ const related = tags.length
 
   <PrevNext prev={prev} next={next} lang={lang} />
 
+  <script is:inline>
+    document.addEventListener("DOMContentLoaded", () => {
+      document.querySelectorAll("a[href]").forEach((a) => {
+        const href = a.getAttribute("href");
+        if (
+          href &&
+          !href.startsWith("/") &&
+          !href.startsWith("#") &&
+          !href.includes(location.hostname)
+        ) {
+          a.setAttribute("target", "_blank");
+          a.setAttribute("rel", "noopener noreferrer");
+        }
+      });
+    });
+  </script>
+
   <div class="mt-8 text-center">
     <a
       href={`/${lang}/`}
