@@ -98,6 +98,7 @@ const robots = noindex ? "noindex, nofollow" : "index, follow";
 {description && <meta name="description" content={description} />}
 <meta name="robots" content={robots} />
 {canonicalAbs && <link rel="canonical" href={canonicalAbs} />}
+<link rel="icon" href="/favicon.svg" type="image/svg+xml" />
 
 <!-- hreflang -->
 {alts.map((a) => <link rel="alternate" hreflang={a.lang} href={a.url} />)}
