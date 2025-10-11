@@ -189,11 +189,16 @@ const desc = t("printers.kr.desc", lang);
           </tr>
         </thead>
         <style is:inline>
+          table {
+            table-layout: fixed;
+            width: 100%;
+          }
           td,
           th {
             white-space: normal !important;
-            word-break: break-word !important;
+            word-break: keep-all;
             vertical-align: middle;
+            overflow-wrap: anywhere;
           }
           .thbtn {
             display: inline-flex;
