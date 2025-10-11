@@ -119,17 +119,26 @@ const desc = t("printers.kr.desc", lang);
     <div
       class="overflow-x-auto border border-border rounded-lg bg-card shadow-sm"
     >
-      <table class="w-full text-sm table-auto break-words">
+      <table class="w-full text-sm table-auto">
         <colgroup>
-          <col class="min-w-[80px]" />
+          <col class="w-[72px] min-w-[72px]" />
+          <!-- 이미지 -->
+          <col class="min-w-[100px] md:w-[140px]" />
+          <!-- 브랜드 -->
+          <col class="min-w-[160px] md:w-[200px]" />
+          <!-- 모델 -->
+          <col class="min-w-[120px] md:w-[140px]" />
+          <!-- 모션 -->
           <col class="min-w-[120px] md:w-[160px]" />
-          <col class="min-w-[220px] md:w-[220px]" />
+          <!-- 빌드 -->
+          <col class="min-w-[100px] md:w-[120px]" />
+          <!-- 속도 -->
           <col class="min-w-[120px] md:w-[140px]" />
-          <col class="min-w-[140px] md:w-[160px]" />
-          <col class="min-w-[120px] md:w-[140px]" />
-          <col class="min-w-[120px] md:w-[140px]" />
-          <col class="min-w-[160px] md:w-[180px]" />
-          <col class="min-w-[100px]" />
+          <!-- 가격 -->
+          <col class="min-w-[80px] md:w-[100px]" />
+          <!-- 구매 -->
+          <col class="min-w-[80px] md:w-[100px]" />
+          <!-- 정보 -->
         </colgroup>
         <thead
           class="bg-muted/80 text-mutedFg supports-[backdrop-filter]:backdrop-blur"
@@ -190,31 +199,40 @@ const desc = t("printers.kr.desc", lang);
         </thead>
         <style is:inline>
           table {
-            table-layout: fixed;
+            table-layout: auto !important;
             width: 100%;
           }
+
           td,
           th {
-            white-space: normal !important;
-            word-break: keep-all;
-            vertical-align: middle;
-            overflow-wrap: anywhere;
+            word-break: keep-all !important;
+            white-space: nowrap !important;
+            overflow-wrap: anywhere !important;
           }
+
           .thbtn {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.25rem;
+            display: inline-block;
             font-weight: 600;
             cursor: pointer;
             user-select: none;
           }
+
+          td:nth-child(8) a {
+            display: inline-block;
+            width: 80px;
+            text-align: center;
+            white-space: nowrap;
+          }
+
           .thbtn:hover {
             opacity: 0.85;
           }
+
           .sort-indicator {
             opacity: 0.7;
             font-size: 0.85em;
           }
+
           .thumb {
             width: 56px;
             height: 56px;
