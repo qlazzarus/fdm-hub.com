@@ -1,0 +1,74 @@
+---
+import { t } from "@utils/i18n";
+
+interface Props {
+  lang: string;
+  page: number;
+  totalPages: number;
+  pageHref: (p: number) => string;
+}
+const { page, totalPages, pageHref } = Astro.props;
+const { lang } = Astro.props as { lang: "ko" | "en" };
+
+// Helper for visible pages
+const maxVisible = 5;
+const half = Math.floor(maxVisible / 2);
+let start = Math.max(1, page - half);
+let end = Math.min(totalPages, start + maxVisible - 1);
+if (end - start < maxVisible - 1) start = Math.max(1, end - maxVisible + 1);
+
+const visiblePages = [];
+if (start > 1) visiblePages.push("...");
+for (let p = start; p <= end; p++) visiblePages.push(p);
+if (end < totalPages) visiblePages.push("...");
+---
+
+<nav
+  class="mt-6 flex justify-center items-center gap-2 text-sm overflow-x-auto sm:overflow-visible whitespace-nowrap scrollbar-none px-2"
+>
+  <!-- Prev -->
+  <a
+    href={page > 1 ? pageHref(page - 1) : undefined}
+    aria-disabled={page === 1}
+    class={`px-3 py-1 rounded-md border ${
+      page === 1
+        ? "opacity-50 pointer-events-none border-border"
+        : "bg-muted text-mutedFg border-border hover:bg-muted/80"
+    }`}
+  >
+    {t("pagination.prev", lang)}
+  </a>
+
+  {
+    visiblePages.map((p) =>
+      p === "..." ? (
+        <span class="px-2">…</span>
+      ) : (
+        <a
+          href={pageHref(p)}
+          aria-current={p === page ? "page" : undefined}
+          class={`px-3 py-1 rounded-md border ${
+            p === page
+              ? "bg-brand text-brandFg border-brand"
+              : "bg-muted text-mutedFg border-border hover:bg-muted/80"
+          }`}
+        >
+          {p}
+        </a>
+      )
+    )
+  }
+
+  <!-- Next -->
+  <a
+    href={page < totalPages ? pageHref(page + 1) : undefined}
+    aria-disabled={page === totalPages}
+    class={`px-3 py-1 rounded-md border ${
+      page === totalPages
+        ? "opacity-50 pointer-events-none border-border"
+        : "bg-muted text-mutedFg border-border hover:bg-muted/80"
+    }`}
+  >
+    {t("pagination.next", lang)}
+  </a>
+</nav>

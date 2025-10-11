@@ -1,5 +1,6 @@
 ---
 import Layout from "@components/Layout.astro";
+import Pagination from "@components/Pagination.astro";
 import PostCard from "@components/PostCard.astro";
 import { t } from "@utils/i18n";
 import { getCollection } from "astro:content";
@@ -55,48 +56,14 @@ const pageHref = (p: number) => (p === 1 ? `/${lang}/` : `/${lang}/page/${p}/`);
   <section class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
     {paged.map((p) => <PostCard post={p} />)}
   </section>
-
   {
     totalPages > 1 && (
-      <nav class="mt-6 flex items-center justify-center gap-2 text-sm">
-        <a
-          href={page > 1 ? pageHref(page - 1) : undefined}
-          aria-disabled={page === 1}
-          class={`px-3 py-1 rounded-md border ${
-            page === 1
-              ? "opacity-50 pointer-events-none border-border"
-              : "bg-muted text-mutedFg border-border hover:bg-muted/80"
-          }`}
-        >
-          {lang === "en" ? "Prev" : "이전"}
-        </a>
-
-        {Array.from({ length: totalPages }, (_, i) => i + 1).map((p) => (
-          <a
-            href={pageHref(p)}
-            aria-current={p === page ? "page" : undefined}
-            class={`px-3 py-1 rounded-md border ${
-              p === page
-                ? "bg-brand text-brandFg border-brand"
-                : "bg-muted text-mutedFg border-border hover:bg-muted/80"
-            }`}
-          >
-            {p}
-          </a>
-        ))}
-
-        <a
-          href={page < totalPages ? pageHref(page + 1) : undefined}
-          aria-disabled={page === totalPages}
-          class={`px-3 py-1 rounded-md border ${
-            page === totalPages
-              ? "opacity-50 pointer-events-none border-border"
-              : "bg-muted text-mutedFg border-border hover:bg-muted/80"
-          }`}
-        >
-          {lang === "en" ? "Next" : "다음"}
-        </a>
-      </nav>
+      <Pagination
+        lang={lang}
+        page={page}
+        totalPages={totalPages}
+        pageHref={pageHref}
+      />
     )
   }
 </Layout>
