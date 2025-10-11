@@ -6,7 +6,7 @@ tags:
   - Kobra S1C
   - 3D printer
   - best-selling
-  - 2025
+  - "2025"
   - affordable
   - print quality
 slug: 20250425-kobra-s1c-the-top-selling-3d-printer-of-2025
