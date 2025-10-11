@@ -26,13 +26,7 @@
       "pros": ["가성비 우수", "쉬운 세팅", "고속 출력 지원"],
       "cons": ["소음", "정밀도는 고가 모델 대비 낮음"],
       "tags": ["Budget", "HighSpeed"],
-      "stores": [
-        {
-          "name": "Coupang",
-          "url": "https://www.coupang.com/vp/products/7639271926?itemId=20293376730&vendorItemId=91267977352&q=ANYCUBIC+Kobra+2+Pro&searchId=7fd9de631290057&sourceType=search&itemsCount=36&searchRank=0&rank=0&traceId=mgdmj149",
-          "type": "retail"
-        }
-      ]
+      "stores": []
     },
     {
       "brand": "Anycubic",
@@ -59,13 +53,7 @@
       "pros": ["합리적 가격", "쉬운 사용성"],
       "cons": ["소음 있음", "기본 펌웨어 한계"],
       "tags": ["EasyUse", "Budget"],
-      "stores": [
-        {
-          "name": "Coupang",
-          "url": "https://www.coupang.com/vp/products/7360096163?itemId=18960542799&vendorItemId=87415170471&q=anycubic+Vyper&searchId=d1ef35f46528706&sourceType=search&itemsCount=36&searchRank=6&rank=6&traceId=mgdmksc8",
-          "type": "retail"
-        }
-      ]
+      "stores": []
     },
     {
       "brand": "Bambu Lab",
@@ -92,13 +80,7 @@
       "pros": ["가격대비 성능 우수", "AMS Lite 호환"],
       "cons": ["개방형 프레임", "소음 다소 있음"],
       "tags": ["AMS", "Budget", "Fast"],
-      "stores": [
-        {
-          "name": "Coupang",
-          "url": "https://www.coupang.com/vp/products/8680007279?itemId=25197625610&vendorItemId=92507816821&q=bambulab+a1&searchId=0cc85d645207434&sourceType=search&itemsCount=36&searchRank=1&rank=1&traceId=mgdmm4so",
-          "type": "retail"
-        }
-      ]
+      "stores": []
     },
     {
       "brand": "Bambu Lab",
@@ -121,13 +103,7 @@
       "pros": ["소형·가벼움", "멀티컬러 입문 최적"],
       "cons": ["빌드 크기 제한"],
       "tags": ["AMS", "Budget", "Compact"],
-      "stores": [
-        {
-          "name": "Coupang",
-          "url": "https://www.coupang.com/vp/products/8680390080",
-          "type": "retail"
-        }
-      ]
+      "stores": []
     },    
     {
       "brand": "Bambu Lab",
@@ -182,13 +158,7 @@
       "pros": ["빠른 출력 속도", "정밀한 CoreXY", "조용한 동작"],
       "cons": ["가격대 높음", "부품 수급 제한"],
       "tags": ["CoreXY", "Enclosed", "High-speed"],
-      "stores": [
-        {
-          "name": "Coupang",
-          "url": "https://www.coupang.com/vp/products/8830010334?itemId=25728323699&vendorItemId=92716950193&q=bambulab+p1s&searchId=9a796c3d5237940&sourceType=search&itemsCount=36&searchRank=3&rank=3&traceId=mgdmrd4o",
-          "type": "retail"
-        }
-      ]
+      "stores": []
     },
     {
       "brand": "Bambu Lab",
@@ -216,13 +186,7 @@
       "pros": ["고속·정밀 출력", "탄소섬유 프레임", "AMS 통합"],
       "cons": ["비싼 가격", "고급 부품 교체비용 높음"],
       "tags": ["CoreXY", "AMS", "High-end"],
-      "stores": [
-        {
-          "name": "Coupang",
-          "url": "https://www.coupang.com/vp/products/8680421779?itemId=25199041142&vendorItemId=92195660506&q=bambulab+x1c&searchId=de967cb815411063&sourceType=search&itemsCount=36&searchRank=1&rank=1&traceId=mgdms3uc",
-          "type": "retail"
-        }
-      ]
+      "stores": []
     },
     {
       "brand": "Creality",
@@ -249,13 +213,7 @@
       "pros": ["가성비", "부품 접근성", "활발한 커뮤니티"],
       "cons": ["고속 출력 한계", "케이블 관리 필요"],
       "tags": ["Budget", "Popular"],
-      "stores": [
-        {
-          "name": "Coupang",
-          "url": "https://www.coupang.com/vp/products/8436563755?itemId=24400206032&vendorItemId=91415045787&q=Ender3+V2&searchId=774719616139655&sourceType=search&itemsCount=36&searchRank=1&rank=1&traceId=mgdmt3kc",
-          "type": "retail"
-        }
-      ]
+      "stores": []
     },
     {
       "brand": "Creality",
@@ -285,13 +243,7 @@
         "방음/밀폐 아쉬움"
       ],
       "tags": ["Budget", "Open-frame"],
-      "stores": [
-        {
-          "name": "Coupang",
-          "url": "https://www.coupang.com/vp/products/8391664421?itemId=24257653798&vendorItemId=91614667272&q=Ender3+V3&searchId=954149be25436616&sourceType=search&itemsCount=36&searchRank=6&rank=6&traceId=mgdmu5d1",
-          "type": "retail"
-        }
-      ]
+      "stores": []
     },
     {
       "brand": "Creality",
@@ -314,13 +266,7 @@
       "pros": ["고속 출력", "정확한 품질", "AI 모니터링"],
       "cons": ["소프트웨어 최적화 부족", "약간의 소음"],
       "tags": ["CoreXY", "AI", "HighSpeed"],
-      "stores": [
-        {
-          "name": "Coupang",
-          "url": "https://www.coupang.com/vp/products/8898615545?itemId=25982807909&vendorItemId=92965301880&q=k1c&searchId=5dd0e47325377349&sourceType=search&itemsCount=36&searchRank=0&rank=0&traceId=mgdmv6fq",
-          "type": "retail"
-        }
-      ]
+      "stores": []
     },
     {
       "brand": "Creality",
@@ -343,13 +289,7 @@
       "pros": ["대형·고속 출력", "정밀도 우수"],
       "cons": ["부피 큼", "소음·발열 관리 필요"],
       "tags": ["CoreXY", "LargeFormat", "HighSpeed"],
-      "stores": [
-        {
-          "name": "Coupang",
-          "url": "https://www.coupang.com/vp/products/7495923559",
-          "type": "retail"
-        }
-      ]
+      "stores": []
     },    
     {
       "brand": "Creality",
@@ -372,13 +312,7 @@
       "pros": ["듀얼 출력 가능", "고속 인쇄", "AMS 호환"],
       "cons": ["초기 세팅 복잡", "소프트웨어 한계"],
       "tags": ["DualExtruder", "CoreXY", "HighSpeed"],
-      "stores": [
-        {
-          "name": "Coupang",
-          "url": "https://www.coupang.com/vp/products/9015825487?itemId=26430977147&vendorItemId=93406761093&sourceType=srp_product_ads&clickEventId=88b7d2a0-a1e0-11f0-b69b-65b33119a2f8&korePlacement=15&koreSubPlacement=1&clickEventId=88b7d2a0-a1e0-11f0-b69b-65b33119a2f8&korePlacement=15&koreSubPlacement=1&traceId=mgdmvs2m",
-          "type": "retail"
-        }
-      ]
+      "stores": []
     },
     {
       "brand": "ELEGOO",
@@ -401,13 +335,7 @@
       "pros": ["고속 출력", "설정 쉬움"],
       "cons": ["소음", "세부 마감 편차"],
       "tags": ["Klipper", "HighSpeed", "Budget"],
-      "stores": [
-        {
-          "name": "Coupang",
-          "url": "https://www.coupang.com/vp/products/8877474292",
-          "type": "retail"
-        }
-      ]
+      "stores": []
     },    
     {
       "brand": "Flashforge",
@@ -486,13 +414,7 @@
       "pros": ["높은 신뢰성", "정밀한 출력 품질", "활발한 커뮤니티"],
       "cons": ["비교적 느린 속도", "가격대 높음"],
       "tags": ["Reliable", "Open-frame"],
-      "stores": [
-        {
-          "name": "Coupang",
-          "url": "https://www.coupang.com/vp/products/8421595446?itemId=24359146951&vendorItemId=91635194904&q=prusa+mk4&searchId=bc46a94c25440459&sourceType=search&itemsCount=36&searchRank=1&rank=1&traceId=mgdmy4vr",
-          "type": "retail"
-        }
-      ]
+      "stores": []
     },
     {
       "brand": "Prusa",
@@ -520,13 +442,7 @@
       "pros": ["대형 출력", "자동화 높은 수준", "정밀한 멀티컬러 지원"],
       "cons": ["가격대 높음", "복잡한 유지보수"],
       "tags": ["CoreXY", "MultiTool", "LargeFormat"],
-      "stores": [
-        {
-          "name": "Coupang",
-          "url": "https://www.coupang.com/vp/products/8949680424?itemId=26177050571&vendorItemId=93156689960&q=prusa+xl&searchId=65c8c177435141&sourceType=search&itemsCount=36&searchRank=3&rank=3&traceId=mgdmyrz5",
-          "type": "retail"
-        }
-      ]
+      "stores": []
     },
     {
       "brand": "Snapmaker",
