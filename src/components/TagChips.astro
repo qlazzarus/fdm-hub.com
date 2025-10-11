@@ -69,7 +69,7 @@ const list = Array.isArray(tags)
                 class={`${base} ${sizing} ${style} will-change-transform hover:-translate-y-0.5`}
                 title={t}
               >
-                {showIcon && <span aria-hidden>🏷️</span>}
+                {showIcon && <span aria-hidden={true}>🏷️</span>}
                 <span class="max-w-[18ch] truncate">{t}</span>
               </a>
             </li>

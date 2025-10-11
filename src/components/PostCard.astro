@@ -1,6 +1,7 @@
 ---
 import TagChips from "@components/TagChips.astro";
 import { formatDate } from "@utils/format";
+import { Image } from "astro:assets";
 const { post } = Astro.props as { post: any };
 const fm = post?.data ?? {};
 const slug: string = post?.slug ?? "";
@@ -32,12 +33,10 @@ const href: string = fm?.canonical
     fm.cover && (
       <a href={href} class="block overflow-hidden rounded-md mb-3 bg-card">
         <div class="aspect-video bg-muted">
-          <img
+          <Image
             src={fm.cover}
             alt={fm.title}
             class="w-full h-full object-cover transition-transform duration-200 group-hover:scale-[1.02]"
-            loading="lazy"
-            decoding="async"
             width="800"
             height="450"
           />

@@ -1,15 +1,24 @@
 ---
 import "../styles/global.css";
 import LangSwitch from "@components/LangSwitch.astro";
+import Seo from "@components/Seo.astro";
 import type { Lang } from "@utils/i18n";
+
 const {
   lang,
   title = "FDM Hub",
   description = "",
+  tags = [],
+  noindex = false,
+  seo = true, // 페이지에서 seo=false 로 끄기 가능
 } = Astro.props as {
   lang: Lang;
   title?: string;
   description?: string;
+  cover?: string;
+  tags?: string[];
+  noindex?: boolean;
+  seo?: boolean;
 };
 
 // Build KO/EN URLs for the current path by swapping the first segment.
@@ -56,8 +65,17 @@ function isActive(href: string) {
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>{title}</title>
-    <meta name="description" content={description} />
+    {
+      seo ? (
+        <Seo
+          title={title}
+          description={description}
+          article={{ tags }}
+          lang={lang}
+          noindex={noindex}
+        />
+      ) : null
+    }
     <link rel="icon" href="/favicon.svg" />
     <script is:inline>
       // Early theme init to prevent flash (FOUC)
