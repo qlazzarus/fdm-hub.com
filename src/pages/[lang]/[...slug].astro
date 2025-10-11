@@ -65,6 +65,8 @@ const related = tags.length
   lang={lang}
   title={fm.title ?? "FDM Hub"}
   description={fm.description ?? ""}
+  tags={fm?.tags ?? []}
+  cover={fm?.cover}
 >
   {
     fm.disclosure && (

@@ -11,6 +11,7 @@ const {
   tags = [],
   noindex = false,
   seo = true, // 페이지에서 seo=false 로 끄기 가능
+  cover,
 } = Astro.props as {
   lang: Lang;
   title?: string;
@@ -72,6 +73,7 @@ function isActive(href: string) {
           description={description}
           article={{ tags }}
           lang={lang}
+          image={cover}
           noindex={noindex}
         />
       ) : null

@@ -60,8 +60,11 @@ const currentPath = Astro.url?.pathname ?? "/";
 const canonicalAbs =
   toAbs(canonical) ?? (site ? site + currentPath : undefined);
 
-// Open Graph/Twitter image (absolute if possible)
-const ogImage = toAbs(image);
+// Fallback image
+const fallbackImage = toAbs("/img/404-fdm.png");
+
+// Open Graph/Twitter image (absolute if possible, fallback if missing)
+const ogImage = toAbs(image) ?? fallbackImage;
 
 // Build hreflang alternates
 let alts: { lang: "ko" | "en"; url: string }[] = [];
@@ -112,19 +115,24 @@ const robots = noindex ? "noindex, nofollow" : "index, follow";
 <meta property="og:site_name" content="FDM Hub" />
 {description && <meta property="og:description" content={description} />}
 {canonicalAbs && <meta property="og:url" content={canonicalAbs} />}
-{ogImage && <meta property="og:image" content={ogImage} />}
-{ogImage && <meta property="og:image:alt" content={title} />}
+<meta property="og:image" content={ogImage} />
+<meta property="og:image:alt" content={title} />
 <meta property="og:locale" content={lang === "en" ? "en_US" : "ko_KR"} />
 
 <!-- Twitter Card -->
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:title" content={title} />
 {description && <meta name="twitter:description" content={description} />}
-{ogImage && <meta name="twitter:image" content={ogImage} />}
+<meta name="twitter:image" content={ogImage} />
 
 {
   article?.tags?.length ? (
-    <meta name="keywords" content={article.tags.join(", ")} />
+    <>
+      <meta name="keywords" content={article.tags.join(", ")} />
+      {article.tags.map((tag) => (
+        <meta name="article:tag" content={tag} />
+      ))}
+    </>
   ) : null
 }
 
