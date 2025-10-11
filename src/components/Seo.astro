@@ -64,7 +64,8 @@ const canonicalAbs =
 const fallbackImage = toAbs("/img/404-fdm.png");
 
 // Open Graph/Twitter image (absolute if possible, fallback if missing)
-const ogImage = toAbs(image) ?? fallbackImage;
+const ogImage =
+  toAbs(image) ?? (site ? `${site}/img/404-fdm.png` : "/img/404-fdm.png");
 
 // Build hreflang alternates
 let alts: { lang: "ko" | "en"; url: string }[] = [];
