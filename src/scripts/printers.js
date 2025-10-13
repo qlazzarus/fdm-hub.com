@@ -9,6 +9,7 @@
   const isEN = root.getAttribute('data-is-en') === 'true';
   const lastUpdatedLabel = root.getAttribute('data-last-updated-label') || (isEN ? 'Last updated' : '최종 업데이트');
   const detailsLabel = root.getAttribute('data-details-label') || (isEN ? 'Details' : '상세');
+  const homepageLabel = root.getAttribute('data-homepage-label') || (isEN ? 'Homepage' : '홈페이지');
   const tagsLabel = root.getAttribute('data-tags-label') || (isEN ? 'Tags' : '태그');
   const featuresLabel = root.getAttribute('data-features-label') || (isEN ? 'Features' : '특징');
   const prosLabel = root.getAttribute('data-pros-label') || (isEN ? 'Pros' : '장점');
@@ -123,10 +124,7 @@
         <td class="px-3 py-2">${p.motion || ''}</td>
         <td class="px-3 py-2">${p.build ? `${p.build.x}×${p.build.y}×${p.build.z}` : ''}</td>
         <td class="px-3 py-2 text-right">${p.typicalSpeed ? p.typicalSpeed + ' mm/s' : (p.maxSpeed ? '≤ ' + p.maxSpeed + ' mm/s' : '-')}</td>
-        <td class="px-3 py-2 text-right">${typeof p.priceKRW === 'number' ? '₩' + fmtKRW(p.priceKRW) : '-'}</td>
-        <td class="px-3 py-2 text-center">
-          ${Array.isArray(p.stores) && p.stores.length ? p.stores.map((s) => `<a class="px-2 py-1 rounded bg-brand text-brandFg hover:bg-brand/90 inline-block mr-1 mb-1" href="${s.url}" target="_blank" rel="nofollow noopener">${s.name}</a>`).join('') : '-'}
-        </td>
+        <td class="px-3 py-2 text-center">${p.officialUrl ? `<a class="px-2 py-1 rounded bg-brand text-brandFg hover:bg-brand/90 inline-block mr-1 mb-1" href="${p.officialUrl}" target="_blank" rel="nofollow noopener">${homepageLabel}</a>` : ''}</td>
         <td class="px-3 py-2 text-center">
           <button type="button" class="info-btn px-2 py-1 rounded-md border border-border hover:bg-muted text-sm" data-key="${encodeURIComponent((p.brand||'') + '||' + (p.model||'') + '||' + (p.year||''))}">${detailsLabel}</button>
         </td>

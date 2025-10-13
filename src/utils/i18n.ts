@@ -113,6 +113,7 @@ const dict: Dict = {
   'printers.kr.th.build': { ko: '빌드(mm)', en: 'Build (mm)' },
   'printers.kr.th.speedTyp': { ko: '속도(권장)', en: 'Speed (typ.)' },
   'printers.kr.th.priceKRW': { ko: '가격(원)', en: 'Price (KRW)' },
+  'printers.kr.th.homepage': { ko: '홈페이지', en: 'Homepage' },
   'printers.kr.th.stores': { ko: '구매', en: 'Stores' },  
   'printers.kr.lastUpdatedPrefix': { ko: '최종 업데이트', en: 'Last updated' },
   'printers.kr.th.image': { ko: '이미지', en: 'Image' },

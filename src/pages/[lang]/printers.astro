@@ -25,6 +25,7 @@ const desc = t("printers.kr.desc", lang);
     data-brand-label={t("printers.kr.allBrands", lang)}
     data-last-updated-label={t("printers.kr.lastUpdatedPrefix", lang)}
     data-details-label={t("printers.kr.details", lang)}
+    data-homepage-label={t("printers.kr.official", lang)}
     data-tags-label={t("printers.kr.tags", lang)}
     data-features-label={t("printers.kr.features", lang)}
     data-pros-label={t("printers.kr.pros", lang)}
@@ -67,8 +68,11 @@ const desc = t("printers.kr.desc", lang);
             <option value="">{t("printers.kr.allMotions", lang)}</option>
             <option>CoreXY</option>
             <option>BedSlinger</option>
-            <option>H-bot</option>
             <option>CoreXZ</option>
+            <option>Cartesian</option>
+            <option>Gantry</option>
+            <option>H-bot</option>
+            <option>Delta</option>
           </select>
 
           <select
@@ -100,7 +104,7 @@ const desc = t("printers.kr.desc", lang);
             <option value="256">≥ 256³</option>
             <option value="300">≥ 300³</option>
           </select>
-
+          <!--
           <select
             id="price"
             class="h-10 px-3 rounded-md border border-border bg-card w-full max-w-full min-w-0 box-border col-span-1 md:col-span-3 appearance-none"
@@ -111,6 +115,7 @@ const desc = t("printers.kr.desc", lang);
             <option value="1000000">≤ KRW 1,000,000</option>
             <option value="2000000">≤ KRW 2,000,000</option>
           </select>
+          -->
         </div>
       </div>
     </section>
@@ -133,10 +138,12 @@ const desc = t("printers.kr.desc", lang);
           <!-- 빌드 -->
           <col class="min-w-[100px] md:w-[120px]" />
           <!-- 속도 -->
-          <col class="min-w-[120px] md:w-[140px]" />
+          <!-- <col class="min-w-[120px] md:w-[140px]" /> -->
           <!-- 가격 -->
-          <col class="min-w-[80px] md:w-[100px]" />
+          <!--  <col class="min-w-[80px] md:w-[100px]" /> -->
           <!-- 구매 -->
+          <col class="min-w-[80px] md:w-[100px]" />
+          <!-- 홈페이지 -->
           <col class="min-w-[80px] md:w-[100px]" />
           <!-- 정보 -->
         </colgroup>
@@ -181,6 +188,15 @@ const desc = t("printers.kr.desc", lang);
             >
             <th class="text-right px-3 py-2"
               ><button
+                data-sort="homepage"
+                class="thbtn w-full text-right whitespace-nowrap"
+                >{t("printers.kr.th.homepage", lang)}
+                <span class="sort-indicator"></span></button
+              ></th
+            >
+            <!--
+            <th class="text-right px-3 py-2"
+              ><button
                 data-sort="price"
                 class="thbtn w-full text-right whitespace-nowrap"
                 >{t("printers.kr.th.priceKRW", lang)}
@@ -190,6 +206,7 @@ const desc = t("printers.kr.desc", lang);
             <th class="text-center px-3 py-2"
               >{t("printers.kr.th.stores", lang)}
             </th>
+            -->
             <th class="text-center px-3 py-2"
               ><button data-sort="info" class="thbtn"
                 >{t("printers.kr.th.info", lang)}</button
