@@ -5,7 +5,7 @@ category: vendor
 tags:
   - Prusa
   - Black Friday
-  - 2025
+  - "2025"
   - 3D printing
   - discounts
   - free shipping
