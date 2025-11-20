@@ -6,7 +6,7 @@ tags:
   - Black Friday
   - 3D Printer Deals
   - Savings
-  - 2025
+  - "2025"
   - 3D Printing
 slug: 20251112-best-black-friday-3d-printer-deals-2025-dont-miss-out-on-huge-savings
 lang: ko
