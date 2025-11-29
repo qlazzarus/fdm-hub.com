@@ -5,7 +5,7 @@ category: vendor
 tags:
   - Anycubic
   - Black Friday
-  - 2025
+  - "2025"
   - 3D printing
   - holiday deals
 slug: 20251121-anycubic-announces-black-friday-2025-holiday-deals
