@@ -1,11 +1,13 @@
 import { defineCollection, z } from 'astro:content';
 
+const tagSchema = z.union([z.string(), z.number()]);
+
 const baseSchema = z.object({
   title: z.string(),
   description: z.string().optional(),
   date: z.string(), // ISO
   lang: z.enum(['ko','en']),
-  tags: z.array(z.string()).optional(),
+  tags: z.array(tagSchema).optional(),
   cover: z.string().optional(),
   canonical: z.string().optional(),
   hreflang: z.array(z.object({ lang: z.enum(['ko','en']), url: z.string() })).optional(),
