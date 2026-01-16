@@ -4,7 +4,11 @@ export const formatDate = (iso: string, lang: 'ko'|'en'='ko') => {
 };
 
 
-export const slugify = (s: string) => {
+export const slugify = (s: string | number) => {
+  if (typeof s === "number") {
+    return String(s);
+  }
+  
   return s
     .toLowerCase()
     .normalize("NFKD")
