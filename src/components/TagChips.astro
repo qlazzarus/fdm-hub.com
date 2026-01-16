@@ -1,4 +1,6 @@
 ---
+import { slugify } from "@utils/format";
+
 // Upgraded TagChips component
 // Props:
 //  - tags: string[]                 (required)
@@ -25,15 +27,6 @@ const {
   size?: "sm" | "md";
   showIcon?: boolean;
 };
-
-function slugify(s: string) {
-  return s
-    .toLowerCase()
-    .normalize("NFKD")
-    .replace(/[^\w\s-]/g, "")
-    .trim()
-    .replace(/\s+/g, "-");
-}
 
 const list = Array.isArray(tags)
   ? typeof limit === "number"
